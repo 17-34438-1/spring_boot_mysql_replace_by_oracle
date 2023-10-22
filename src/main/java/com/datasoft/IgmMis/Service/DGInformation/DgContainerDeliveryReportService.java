@@ -25,9 +25,6 @@ public class DgContainerDeliveryReportService {
     @Qualifier("jdbcTemplateSecondary")
     private JdbcTemplate SecondaryDBTemplate;
 
-    @Autowired
-    @Qualifier("jdbcTemplateOracle")
-    private JdbcTemplate OracleDbTemplate;
 
 
     public List DgContainerDeliveryReport(String sCriteria, String srotation, String fromdate, String todate) {
@@ -144,17 +141,30 @@ public class DgContainerDeliveryReportService {
             dgContainerDeliveryReport.setCont_un(rs.getString("cont_un"));
             dgContainerDeliveryReport.setDescription_of_Goods(rs.getString("Description_of_Goods"));
             dgContainerDeliveryReport.setNotify_name(rs.getString("Notify_name"));
-
-
-            String Query="SELECT inv_unit_fcy_visit.flex_string04 AS rl_no,inv_unit_fcy_visit.flex_string04 AS rl_date,inv_unit_fcy_visit.flex_string07 AS obpc_number,\n" +
-                    "inv_unit_fcy_visit.flex_string08 AS obpc_date,inv_unit_fcy_visit.time_in, inv_unit_fcy_visit.time_out,argo_carrier_visit.ata,r.id AS mlo\n" +
+            String Query="\n" +
+                    "SELECT inv_unit_fcy_visit.flex_string04 AS rl_no,inv_unit_fcy_visit.flex_string04 AS rl_date,inv_unit_fcy_visit.flex_string07 AS obpc_number,\n" +
+                    "inv_unit_fcy_visit.flex_string08 AS obpc_date,inv_unit_fcy_visit.time_in, inv_unit_fcy_visit.time_out,sparcsn4.argo_carrier_visit.ata,r.id AS mlo,\n" +
+                    "IFNULL((SELECT SUBSTRING(sparcsn4.srv_event_field_changes.new_value,7)\n" +
+                    "FROM sparcsn4.srv_event \n" +
+                    "INNER JOIN sparcsn4.srv_event_field_changes ON sparcsn4.srv_event_field_changes.event_gkey=sparcsn4.srv_event.gkey \n" +
+                    "WHERE sparcsn4.srv_event.applied_to_gkey=inv_unit.gkey AND sparcsn4.srv_event.event_type_gkey IN(18,13,16)\n" +
+                    "AND sparcsn4.srv_event_field_changes.new_value IS NOT NULL AND sparcsn4.srv_event_field_changes.new_value !='' AND \n" +
+                    "sparcsn4.srv_event_field_changes.new_value !='Y-CGP-.' AND sparcsn4.srv_event.gkey <\n" +
+                    "(SELECT sparcsn4.srv_event.gkey\n" +
+                    "FROM sparcsn4.srv_event INNER JOIN sparcsn4.srv_event_field_changes ON sparcsn4.srv_event_field_changes.event_gkey=sparcsn4.srv_event.gkey\n" +
+                    "WHERE sparcsn4.srv_event.event_type_gkey=4 AND sparcsn4.srv_event.applied_to_gkey=inv_unit.gkey AND metafield_id='unitFlexString01'\n" +
+                    "AND new_value IS NOT NULL ORDER BY sparcsn4.srv_event_field_changes.gkey DESC LIMIT 1) ORDER BY sparcsn4.srv_event.gkey \n" +
+                    "DESC LIMIT 1),(SELECT SUBSTRING(sparcsn4.srv_event_field_changes.new_value,7) FROM sparcsn4.srv_event \n" +
+                    "INNER JOIN sparcsn4.srv_event_field_changes ON sparcsn4.srv_event_field_changes.event_gkey=sparcsn4.srv_event.gkey \n" +
+                    "WHERE sparcsn4.srv_event.applied_to_gkey=inv_unit.gkey AND sparcsn4.srv_event.event_type_gkey IN(18,13,16) \n" +
+                    "ORDER BY sparcsn4.srv_event_field_changes.gkey DESC LIMIT 1)) AS slot\n" +
                     "FROM inv_unit \n" +
-                    "INNER JOIN inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey \n" +
-                    "INNER JOIN argo_carrier_visit ON inv_unit_fcy_visit.actual_ib_cv=argo_carrier_visit.gkey \n" +
-                    "INNER JOIN vsl_vessel_visit_details ON argo_carrier_visit.cvcvd_gkey=vsl_vessel_visit_details.vvd_gkey\n" +
-                    "INNER JOIN ref_bizunit_scoped r ON r.gkey=inv_unit.line_op \n" +
+                    "INNER JOIN sparcsn4.inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey \n" +
+                    "INNER JOIN sparcsn4.argo_carrier_visit ON sparcsn4.inv_unit_fcy_visit.actual_ib_cv=sparcsn4.argo_carrier_visit.gkey \n" +
+                    "INNER JOIN sparcsn4.vsl_vessel_visit_details ON sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                    "INNER JOIN sparcsn4.ref_bizunit_scoped r ON r.gkey=inv_unit.line_op \n" +
                     "WHERE inv_unit.id ='"+cont_number+"' AND vsl_vessel_visit_details.ib_vyg='"+import_Rotation_no+"'";
-            List<DgContainerReport> resultList=OracleDbTemplate.query(Query,new DgContainer_Dalivery_Report());
+            List<DgContainerReport> resultList=SecondaryDBTemplate.query(Query,new DgContainer_Dalivery_Report());
             DgContainerReport dgContainerReport;
             Integer rl_no=0;
             Integer arr=0;
@@ -166,11 +176,10 @@ public class DgContainerDeliveryReportService {
                 dgContainerDeliveryReport.setObpc_date(dgContainerReport.getObpc_date());
                 dgContainerDeliveryReport.setObpc_number(dgContainerReport.getObpc_number());
                 dgContainerDeliveryReport.setTime_out(dgContainerReport.getTime_out());
+                dgContainerDeliveryReport.setSlot(dgContainerReport.getSlot());
                 dgContainerDeliveryReport.setRl_no(dgContainerReport.getRl_no());
                 dgContainerDeliveryReport.setRl_date(dgContainerReport.getRl_date());
             }
-
-
             return dgContainerDeliveryReport;
         }
     }
@@ -199,6 +208,7 @@ public class DgContainerDeliveryReportService {
 
             dgContainerReport.setMlo(rs.getString("mlo"));
 
+            dgContainerReport.setSlot(rs.getString("slot"));
 
             return dgContainerReport;
         }

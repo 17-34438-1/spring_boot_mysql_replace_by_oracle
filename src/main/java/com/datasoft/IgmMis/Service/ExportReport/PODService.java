@@ -42,6 +42,7 @@ public class PODService {
     }
 
     public List podListByPlaceCode(String place_code) throws SQLException{
+        System.out.println("Helow World for bangladesh");
         String sql="SELECT DISTINCT ref_unloc_code.id,ref_unloc_code.place_code,ref_unloc_code.place_name\n" +
                 "FROM ref_routing_point\n" +
                 "INNER JOIN ref_unloc_code ON ref_unloc_code.gkey=ref_routing_point.unloc_gkey\n" +

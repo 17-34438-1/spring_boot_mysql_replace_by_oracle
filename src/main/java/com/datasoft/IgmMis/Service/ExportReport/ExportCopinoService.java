@@ -17,28 +17,16 @@ public class ExportCopinoService {
     @Autowired
     @Qualifier("jdbcTemplateSecondary")
     private JdbcTemplate SecondaryDBTemplate;
-
-
-    @Autowired
-    @Qualifier("jdbcTemplateOracle")
-    private JdbcTemplate OracleDbTemplate;
-
-
-    @Autowired
-    @Qualifier("jdbcTemplatePrimary")
-    private JdbcTemplate primaryDBTemplate;
-
-
     public List CopinoData(String rotation)throws SQLException{
         String Rotation=rotation.replace("_","/");
         System.out.println(Rotation);
-        String sql="SELECT NAME FROM vsl_vessels INNER JOIN\n" +
-                "vsl_vessel_visit_details ON\n" +
-                "vsl_vessel_visit_details.vessel_gkey=vsl_vessels.gkey\n" +
-                "WHERE vsl_vessel_visit_details.ib_vyg='"+Rotation+"'";
+        String sql="SELECT NAME FROM sparcsn4.vsl_vessels INNER JOIN\n" +
+                "sparcsn4.vsl_vessel_visit_details ON\n" +
+                "sparcsn4.vsl_vessel_visit_details.vessel_gkey=sparcsn4.vsl_vessels.gkey\n" +
+                "WHERE sparcsn4.vsl_vessel_visit_details.ib_vyg='"+Rotation+"'";
         System.out.println("query :"+ sql);
 
-        List Copino=OracleDbTemplate.query(sql,new CopinoData());
+        List Copino=SecondaryDBTemplate.query(sql,new CopinoData());
         List listAll=(List) Copino.stream().collect(Collectors.toList());
         System.out.println("length: "+listAll.size());
         return listAll;
@@ -60,10 +48,11 @@ public class ExportCopinoService {
         String import_Rotation=rotation.replace("_","/");
         System.out.println(import_Rotation);
         String sql="SELECT cont_id,cont_size,cont_height,isoType,cont_mlo,cont_status,goods_and_ctr_wt_kg,seal_no \n" +
-                "FROM mis_exp_unit_preadv_req WHERE rotation='"+import_Rotation+"' ORDER BY 1";
-        List CopinoData=primaryDBTemplate.query(sql,new ExportCopinoData());
+                "FROM ctmsmis.mis_exp_unit_preadv_req WHERE rotation='"+import_Rotation+"' ORDER BY 1";
+        List CopinoData=SecondaryDBTemplate.query(sql,new ExportCopinoData());
         List listAll=(List) CopinoData.stream().collect(Collectors.toList());
         return listAll;
+
     }
     class ExportCopinoData implements RowMapper{
         @Override
@@ -78,6 +67,7 @@ public class ExportCopinoService {
             exportCopino.setGoods_and_ctr_wt_kg(rs.getString("goods_and_ctr_wt_kg"));
             exportCopino.setSeal_no(rs.getString("seal_no"));
             return exportCopino;
+
         }
     }
 }

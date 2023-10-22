@@ -15,32 +15,20 @@ import java.util.*;
 
 @Service
 public class ExportContainerBayViewService {
-
-
     @Autowired
     @Qualifier("jdbcTemplateSecondary")
     private JdbcTemplate secondaryDBTemplate;
-
-    @Autowired
-    @Qualifier("jdbcTemplateOracle")
-    private JdbcTemplate OracleDbTemplate;
-
-    @Autowired
-    @Qualifier("jdbcTemplatePrimary")
-    private JdbcTemplate primaryDBTemplate;
-
-
 
     public Integer getVvdGkey(String rotation){
         List<ImportCotainerBayViewModel> vvdGkeyList=new ArrayList<>();
         String sqlQuery="";
         Integer vvdGkey=0;
-        sqlQuery="SELECT vsl_vessel_visit_details.vvd_gkey,vsl_vessel_visit_details.ib_vyg\n" +
-                "FROM vsl_vessel_visit_details\n" +
-                "INNER JOIN argo_carrier_visit ON argo_carrier_visit.cvcvd_gkey=vsl_vessel_visit_details.vvd_gkey\n" +
-                "INNER JOIN vsl_vessels ON vsl_vessels.gkey=vsl_vessel_visit_details.vessel_gkey\n" +
+        sqlQuery="SELECT sparcsn4.vsl_vessel_visit_details.vvd_gkey,sparcsn4.vsl_vessel_visit_details.ib_vyg\n" +
+                "FROM sparcsn4.vsl_vessel_visit_details\n" +
+                "INNER JOIN sparcsn4.argo_carrier_visit ON sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                "INNER JOIN sparcsn4.vsl_vessels ON sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
                 "WHERE ib_vyg='"+rotation+"'";
-        vvdGkeyList=OracleDbTemplate.query(sqlQuery,new ExportContainerBayViewService.VvdGkey());
+        vvdGkeyList=secondaryDBTemplate.query(sqlQuery,new ExportContainerBayViewService.VvdGkey());
         for(int i=0; i<vvdGkeyList.size();i++){
             vvdGkey=vvdGkeyList.get(i).getVvd_gkey();
 
@@ -53,14 +41,14 @@ public class ExportContainerBayViewService {
     public List getContainerBayVesselInfo(Integer vvdgkey) {
         List<ImportCotainerBayViewModel> vesselInfoList=new ArrayList<>();
         String sqlQuery="";
-        sqlQuery="select vsl_vessels.id,vsl_vessels.name,vsl_vessel_visit_details.ib_vyg,\n" +
-                "argo_carrier_visit.ata,argo_carrier_visit.atd\n" +
-                "from vsl_vessel_visit_details\n" +
-                "inner join argo_carrier_visit on argo_carrier_visit.cvcvd_gkey=vsl_vessel_visit_details.vvd_gkey\n" +
-                "inner join vsl_vessels on vsl_vessels.gkey=vsl_vessel_visit_details.vessel_gkey\n" +
-                "where vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
+        sqlQuery="select sparcsn4.vsl_vessels.id,sparcsn4.vsl_vessels.name,sparcsn4.vsl_vessel_visit_details.ib_vyg,\n" +
+                "sparcsn4.argo_carrier_visit.ata,sparcsn4.argo_carrier_visit.atd\n" +
+                "from sparcsn4.vsl_vessel_visit_details\n" +
+                "inner join sparcsn4.argo_carrier_visit on sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                "inner join sparcsn4.vsl_vessels on sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
+                "where sparcsn4.vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
 
-        vesselInfoList=OracleDbTemplate.query(sqlQuery,new ExportContainerBayViewService.VesselInfo());
+        vesselInfoList=secondaryDBTemplate.query(sqlQuery,new ExportContainerBayViewService.VesselInfo());
         return vesselInfoList;
 
     }
@@ -69,14 +57,14 @@ public class ExportContainerBayViewService {
         List<ImportCotainerBayViewModel> resultList=new ArrayList<>();
         List<ImportCotainerBayViewModel> vesselInfoList=new ArrayList<>();
         String sqlQuery="";
-        sqlQuery="select vsl_vessels.id,vsl_vessels.name,vsl_vessel_visit_details.ib_vyg,\n" +
-                "argo_carrier_visit.ata,argo_carrier_visit.atd\n" +
-                "from vsl_vessel_visit_details\n" +
-                "inner join argo_carrier_visit on argo_carrier_visit.cvcvd_gkey=vsl_vessel_visit_details.vvd_gkey\n" +
-                "inner join vsl_vessels on vsl_vessels.gkey=vsl_vessel_visit_details.vessel_gkey\n" +
-                "where vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
+        sqlQuery="select sparcsn4.vsl_vessels.id,sparcsn4.vsl_vessels.name,sparcsn4.vsl_vessel_visit_details.ib_vyg,\n" +
+                "sparcsn4.argo_carrier_visit.ata,sparcsn4.argo_carrier_visit.atd\n" +
+                "from sparcsn4.vsl_vessel_visit_details\n" +
+                "inner join sparcsn4.argo_carrier_visit on sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                "inner join sparcsn4.vsl_vessels on sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
+                "where sparcsn4.vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
 
-        vesselInfoList=OracleDbTemplate.query(sqlQuery,new ExportContainerBayViewService.VesselInfo());
+        vesselInfoList=secondaryDBTemplate.query(sqlQuery,new ExportContainerBayViewService.VesselInfo());
         String vesselId="";
         String vesselName="";
         String rotation="";
@@ -90,9 +78,9 @@ public class ExportContainerBayViewService {
 
         }
 
-        sqlQuery="select * from misBayView where vslId='"+vesselId+"' order by bay asc";
+        sqlQuery="select * from ctmsmis.misBayView where vslId='"+vesselId+"' order by bay asc";
         System.out.println(sqlQuery);
-        resultList=primaryDBTemplate.query(sqlQuery,new ExportContainerBayViewService.MisBayView());
+        resultList=secondaryDBTemplate.query(sqlQuery,new ExportContainerBayViewService.MisBayView());
         Integer mystat = 0;
         for(int i=0; i< resultList.size(); i++ ){
             ImportContainerBayViewMainModel resultModel=new ImportContainerBayViewMainModel();
@@ -156,31 +144,33 @@ public class ExportContainerBayViewService {
             prevBay1 = importCotainerBayViewModel.getBay()-1;
             prevBay2 =importCotainerBayViewModel.getBay()-2;
             String strChkBayQuery="";
-            strChkBayQuery = "select count(bay) as cnt from misBayView where vslId='"+vesselId+"' and bay='"+prevBay1+"'";
-            List<ImportCotainerBayViewModel> bayCountList=primaryDBTemplate.query(strChkBayQuery,new ExportContainerBayViewService.CheckBay());
+            strChkBayQuery = "select count(bay) as cnt from ctmsmis.misBayView where vslId='"+vesselId+"' and bay='"+prevBay1+"'";
+            List<ImportCotainerBayViewModel> bayCountList=secondaryDBTemplate.query(strChkBayQuery,new ExportContainerBayViewService.CheckBay());
             Integer bayCount=0;
             if(bayCountList.size()>0){
                 bayCount=bayCountList.get(0).getCnt();
             }
             String strBayStateQuery = "";
             if(bayCount>0){
-                strBayStateQuery="select paired from misBayView where vslId='"+vesselId+"' and bay='"+prevBay1+"'";
+                strBayStateQuery="select paired from ctmsmis.misBayView where vslId='"+vesselId+"' and bay='"+prevBay1+"'";
             }
             else{
-                strBayStateQuery="select paired from misBayView where vslId='"+vesselId+"' and bay='"+prevBay2+"'";
+                strBayStateQuery="select paired from ctmsmis.misBayView where vslId='"+vesselId+"' and bay='"+prevBay2+"'";
             }
 
-            List<ImportCotainerBayViewModel> bayStateList=primaryDBTemplate.query(strBayStateQuery,new ExportContainerBayViewService.BaySate());
+            List<ImportCotainerBayViewModel> bayStateList=secondaryDBTemplate.query(strBayStateQuery,new ExportContainerBayViewService.BaySate());
             Integer bayState=0;
             if(bayStateList.size()>0){
                 bayState=bayStateList.get(0).getPaired();
+
             }
             if(importCotainerBayViewModel.getBay()==1 && importCotainerBayViewModel.getPaired()==0){
                 mystat=1;
+
             }
             String strMaxColQuery="";
-            strMaxColQuery = "select max(maxColLimit) as maxCol from misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"'";
-            List<ImportCotainerBayViewModel> maxColList=primaryDBTemplate.query(strMaxColQuery,new ExportContainerBayViewService.MaxCol());
+            strMaxColQuery = "select max(maxColLimit) as maxCol from ctmsmis.misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"'";
+            List<ImportCotainerBayViewModel> maxColList=secondaryDBTemplate.query(strMaxColQuery,new ExportContainerBayViewService.MaxCol());
             Integer maxCol=0;
 
             if(maxColList.size()>0){
@@ -190,8 +180,8 @@ public class ExportContainerBayViewService {
             resultModel.setMaxCol(maxCol);
             resultModel.setTitle(title);
             String  strUpDeckLblQuery="";
-            strUpDeckLblQuery = "select minColLimit,maxColLimit from misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"'";
-            List<ImportCotainerBayViewModel> maxAndMInColList=primaryDBTemplate.query(strUpDeckLblQuery,new ExportContainerBayViewService.MaxAndMInCOlLImit());
+            strUpDeckLblQuery = "select minColLimit,maxColLimit from ctmsmis.misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"'";
+            List<ImportCotainerBayViewModel> maxAndMInColList=secondaryDBTemplate.query(strUpDeckLblQuery,new ExportContainerBayViewService.MaxAndMInCOlLImit());
             Integer minColLimit=0;
             Integer kl=0;
             if(maxAndMInColList.size()>0){
@@ -282,9 +272,9 @@ public class ExportContainerBayViewService {
 
                 ImportContainerBayViewTempModel daynamicRowModel= new ImportContainerBayViewTempModel();
                 String strUpDeck="";
-                strUpDeck = "select minColLimit,maxColLimit from misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"' and bayRow='"+ivalue+"'";
+                strUpDeck = "select minColLimit,maxColLimit from ctmsmis.misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"' and bayRow='"+ivalue+"'";
 
-                List<ImportCotainerBayViewModel> resUpDeckList=primaryDBTemplate.query(strUpDeck,new ExportContainerBayViewService.MaxAndMInCOlLImit());
+                List<ImportCotainerBayViewModel> resUpDeckList=secondaryDBTemplate.query(strUpDeck,new ExportContainerBayViewService.MaxAndMInCOlLImit());
                 System.out.println(resUpDeckList.size());
                 // Integer minColLimitUp=0;
                 Integer maxColLimitUp=0;
@@ -355,20 +345,14 @@ public class ExportContainerBayViewService {
                         slot1 = rby12 + pos;
                         slot2 = rby22 + pos;
 
+                        strPrevCont = "select right(sparcsn4.ref_equip_type.nominal_length,2) as size from ctmsmis.mis_exp_unit \n" +
+                                "\t\t\t\t\tinner join sparcsn4.inv_unit on sparcsn4.inv_unit.gkey=ctmsmis.mis_exp_unit.gkey \n" +
+                                "\t\t\t\t\tinner join sparcsn4.inv_unit_equip on sparcsn4.inv_unit_equip.unit_gkey=sparcsn4.inv_unit.gkey\n" +
+                                "\t\t\t\t\tinner join sparcsn4.ref_equipment on sparcsn4.ref_equipment.gkey=sparcsn4.inv_unit_equip.eq_gkey\n" +
+                                "\t\t\t\t\tinner join sparcsn4.ref_equip_type on sparcsn4.ref_equip_type.gkey=sparcsn4.ref_equipment.eqtyp_gkey\n" +
+                                "\t\t\t\t\twhere (stowage_pos='"+slot1+"' or stowage_pos='"+slot2+"') and ctmsmis.mis_exp_unit.vvd_gkey='"+vvdgkey+"'";
 
-//                        strPrevCont = "select right(sparcsn4.ref_equip_type.nominal_length,2) as size from ctmsmis.mis_exp_unit \n" +
-//                                "\t\t\t\t\tinner join sparcsn4.inv_unit on sparcsn4.inv_unit.gkey=ctmsmis.mis_exp_unit.gkey \n" +
-//                                "\t\t\t\t\tinner join sparcsn4.inv_unit_equip on sparcsn4.inv_unit_equip.unit_gkey=sparcsn4.inv_unit.gkey\n" +
-//                                "\t\t\t\t\tinner join sparcsn4.ref_equipment on sparcsn4.ref_equipment.gkey=sparcsn4.inv_unit_equip.eq_gkey\n" +
-//                                "\t\t\t\t\tinner join sparcsn4.ref_equip_type on sparcsn4.ref_equip_type.gkey=sparcsn4.ref_equipment.eqtyp_gkey\n" +
-//                                "\t\t\t\t\twhere (stowage_pos='"+slot1+"' or stowage_pos='"+slot2+"') and ctmsmis.mis_exp_unit.vvd_gkey='"+vvdgkey+"'";
-                strPrevCont = "select substr(ref_equip_type.nominal_length,-2) as cont_size, inv_unit_fcy_visit.last_pos_slot AS stowage_pos\n" +
-                        "from inv_unit\n" +
-                        "INNER JOIN inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey\n" +
-                        "INNER JOIN ref_equipment ON ref_equipment.gkey=inv_unit.eq_gkey\n" +
-                        "inner join ref_equip_type on ref_equip_type.gkey=ref_equipment.eqtyp_gkey\n" +
-                        "where (inv_unit_fcy_visit.last_pos_slot='"+slot1+"' or inv_unit_fcy_visit.last_pos_slot='"+slot2+"')";
-                        dynamicSizeList=OracleDbTemplate.query(strPrevCont,new ExportContainerBayViewService.DynamicSize());
+                        dynamicSizeList=secondaryDBTemplate.query(strPrevCont,new ExportContainerBayViewService.DynamicSize());
                     }
 
                     if(dynamicSizeList.size()>0 && importCotainerBayViewModel.getPaired() == 0 && dynamicSizeList.get(0).getSize() > 20 && mystat == 0 && bayState > 0) {

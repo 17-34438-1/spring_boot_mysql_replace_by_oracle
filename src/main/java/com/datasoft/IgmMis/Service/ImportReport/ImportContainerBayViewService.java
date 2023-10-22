@@ -172,7 +172,9 @@ public class ImportContainerBayViewService {
              if(maxColList.size()>0){
                  maxCol=maxColList.get(0).getMaxCol();
              }
-
+            /* if(importCotainerBayViewModel.getCenterLineA()==1){
+                 maxCol=maxCol+1;
+             }*/
              resultModel.setMaxCol(maxCol);
              resultModel.setTitle(title);
             String  strUpDeckLblQuery="";

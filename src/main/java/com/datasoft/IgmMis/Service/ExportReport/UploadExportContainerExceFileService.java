@@ -28,20 +28,6 @@ public class UploadExportContainerExceFileService {
     @Autowired
     @Qualifier("jdbcTemplateSecondary")
     private JdbcTemplate secondaryDBTemplate;
-
-
-
-    @Autowired
-    @Qualifier("jdbcTemplateOracle")
-    private JdbcTemplate OracleDbTemplate;
-
-    @Autowired
-    @Qualifier("jdbcTemplatePrimary")
-    private JdbcTemplate primaryDBTemplate;
-
-
-
-
     private final Path fileStorageLocation;
 
     @Autowired
@@ -112,8 +98,8 @@ public class UploadExportContainerExceFileService {
 
        String vvdGkeyQuery="";
        Integer vvdGkey=0;
-       vvdGkeyQuery="SELECT vvd_gkey AS rtnValue FROM vsl_vessel_visit_details WHERE ib_vyg='"+rotation+"'";
-        vvdgkeyList=OracleDbTemplate.query(vvdGkeyQuery,new UploadExportContainerExceFileService.RtnValue());
+       vvdGkeyQuery="SELECT vvd_gkey AS rtnValue FROM sparcsn4.vsl_vessel_visit_details WHERE ib_vyg='"+rotation+"'";
+        vvdgkeyList=secondaryDBTemplate.query(vvdGkeyQuery,new UploadExportContainerExceFileService.RtnValue());
         if(vvdgkeyList.size()>0){
             vvdGkey=vvdgkeyList.get(0).getRtnValue();
             while (i<excelTotalRow){
@@ -125,7 +111,7 @@ public class UploadExportContainerExceFileService {
                }
                 catch (NullPointerException e){
                 }
-               // HSSFRow row=worksheet.getRow(i);
+              //  HSSFRow row=worksheet.getRow(i);
                // cellValue=worksheet.getRow(i).getCell(1).getStringCellValue().trim();
                 if(!cellValue.equals("")){
                     totalResultRow=totalResultRow+1;
@@ -167,9 +153,9 @@ public class UploadExportContainerExceFileService {
                     String sqlStowChkQuery="";
                    List<UploadExportContainer> sqlStowChkQueryList=new ArrayList<>();
                     sqlStowChkQuery="SELECT COUNT(*) AS rtnValue\n" +
-                            "\t\t\t\tFROM mis_exp_unit\n" +
-                            "\t\t\t\tWHERE mis_exp_unit.vvd_gkey='"+vvdGkey+"' AND mis_exp_unit.stowage_pos='"+stowage+"'";
-                    sqlStowChkQueryList=primaryDBTemplate.query(sqlStowChkQuery,new UploadExportContainerExceFileService.RtnValue());
+                            "\t\t\t\tFROM ctmsmis.mis_exp_unit\n" +
+                            "\t\t\t\tWHERE ctmsmis.mis_exp_unit.vvd_gkey='"+vvdGkey+"' AND ctmsmis.mis_exp_unit.stowage_pos='"+stowage+"'";
+                    sqlStowChkQueryList=secondaryDBTemplate.query(sqlStowChkQuery,new UploadExportContainerExceFileService.RtnValue());
                     if(sqlStowChkQueryList.size()>0){
                         count_stowage=sqlStowChkQueryList.get(0).getRtnValue();
                     }
@@ -177,24 +163,18 @@ public class UploadExportContainerExceFileService {
                 }
                 List<UploadExportContainer> countContainerList=new ArrayList<>();
                 String countContainerQuery="";
-                countContainerQuery="SELECT count(id) AS rtnValue FROM inv_unit WHERE id='"+container+"'";
-                countContainerList=OracleDbTemplate.query(countContainerQuery,new UploadExportContainerExceFileService.RtnValue());
+                countContainerQuery="SELECT count(id) AS rtnValue FROM sparcsn4.inv_unit WHERE id='"+container+"'";
+                countContainerList=secondaryDBTemplate.query(countContainerQuery,new UploadExportContainerExceFileService.RtnValue());
                 if(countContainerList.size()>0){
                     count_container=countContainerList.get(0).getRtnValue();
                 }
                 List<UploadExportContainer> sqlPodCheckList=new ArrayList<>();
                 String sqlPodCheckQuery="";
-//                sqlPodCheckQuery="SELECT count(sparcsn4.ref_routing_point.id) as rtnValue FROM sparcsn4.vsl_vessel_visit_details\n" +
-//                        "\t\t\tINNER JOIN sparcsn4.argo_visit_details ON sparcsn4.argo_visit_details.gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
-//                        "\t\t\tINNER JOIN sparcsn4.ref_point_calls ON sparcsn4.ref_point_calls.itin_gkey=sparcsn4.argo_visit_details.itinereray\n" +
-//                        "\t\t\tINNER JOIN sparcsn4.ref_routing_point ON sparcsn4.ref_point_calls.point_gkey=sparcsn4.ref_routing_point.gkey \n" +
-//                        "\t\t\tWHERE sparcsn4.vsl_vessel_visit_details.ib_vyg='"+rotation+"' AND id='"+pod+"'";
-
-                sqlPodCheckQuery="SELECT count(ref_routing_point.id) as rtnValue FROM vsl_vessel_visit_details\n" +
-                        "INNER JOIN argo_visit_details ON argo_visit_details.gkey=vsl_vessel_visit_details.vvd_gkey\n" +
-                        "INNER JOIN ref_point_calls ON ref_point_calls.itin_gkey=argo_visit_details.itinereray\n" +
-                        "INNER JOIN ref_routing_point ON ref_point_calls.point_gkey=ref_routing_point.gkey \n" +
-                        "WHERE vsl_vessel_visit_details.ib_vyg='"+rotation+"' AND id='"+pod+"'";
+                sqlPodCheckQuery="SELECT count(sparcsn4.ref_routing_point.id) as rtnValue FROM sparcsn4.vsl_vessel_visit_details\n" +
+                        "\t\t\tINNER JOIN sparcsn4.argo_visit_details ON sparcsn4.argo_visit_details.gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                        "\t\t\tINNER JOIN sparcsn4.ref_point_calls ON sparcsn4.ref_point_calls.itin_gkey=sparcsn4.argo_visit_details.itinereray\n" +
+                        "\t\t\tINNER JOIN sparcsn4.ref_routing_point ON sparcsn4.ref_point_calls.point_gkey=sparcsn4.ref_routing_point.gkey \n" +
+                        "\t\t\tWHERE sparcsn4.vsl_vessel_visit_details.ib_vyg='"+rotation+"' AND id='"+pod+"'";
                 sqlPodCheckList=secondaryDBTemplate.query(sqlPodCheckQuery,new UploadExportContainerExceFileService.RtnValue());
 
                 if(sqlPodCheckList.size()>0){
@@ -222,9 +202,9 @@ public class UploadExportContainerExceFileService {
                     List<UploadExportContainer> strStowContList=new ArrayList<>();
                   String strStowContQuery="";
                   strStowContQuery="SELECT cont_id AS rtnValue\n" +
-                          "\t\t\t\tFROM mis_exp_unit\n" +
-                          "\t\t\t\tWHERE mis_exp_unit.vvd_gkey='"+vvdGkey+"' AND mis_exp_unit.stowage_pos='"+stowage+"'";
-                    strStowContList=primaryDBTemplate.query(strStowContQuery,new UploadExportContainerExceFileService.ContId());
+                          "\t\t\t\tFROM ctmsmis.mis_exp_unit\n" +
+                          "\t\t\t\tWHERE ctmsmis.mis_exp_unit.vvd_gkey='"+vvdGkey+"' AND ctmsmis.mis_exp_unit.stowage_pos='"+stowage+"'";
+                    strStowContList=secondaryDBTemplate.query(strStowContQuery,new UploadExportContainerExceFileService.ContId());
                     if(strStowContList.size()>0) {
                         stowCont=strStowContList.get(0).getContId();
                         if (!(stowCont.equals(container))) {
@@ -283,8 +263,8 @@ public class UploadExportContainerExceFileService {
                     Integer yes=0;
                     System.out.println("row"+ row);
 
-                    strGkeyQuery="SELECT gkey as rtnValue FROM inv_unit WHERE id='"+container+"' ORDER BY gkey DESC LIMIT 1";
-                    strGkeyQueryList=OracleDbTemplate.query(strGkeyQuery,new UploadExportContainerExceFileService.RtnValue());
+                    strGkeyQuery="SELECT gkey as rtnValue FROM sparcsn4.inv_unit WHERE id='"+container+"' ORDER BY gkey DESC LIMIT 1";
+                    strGkeyQueryList=secondaryDBTemplate.query(strGkeyQuery,new UploadExportContainerExceFileService.RtnValue());
                     if(strGkeyQueryList.size()>0) {
                         gkey = strGkeyQueryList.get(0).getRtnValue();
                         iso = worksheet.getRow(row).getCell(2).getStringCellValue().trim();
@@ -293,22 +273,11 @@ public class UploadExportContainerExceFileService {
                         if(mlo==null){
                             List<UploadExportContainer> sqlMloQueryList= new ArrayList<>();
                             String sqlMloQuery="";
-
-
-//                            sqlMloQuery="select sparcsn4.ref_bizunit_scoped.id as rtnValue\n" +
-//                                    "\t\t\t\tfrom sparcsn4.inv_unit\n" +
-//                                    "\t\t\t\tinner join sparcsn4.ref_bizunit_scoped on sparcsn4.ref_bizunit_scoped.gkey=sparcsn4.inv_unit.line_op\n" +
-//                                    "\t\t\t\twhere sparcsn4.inv_unit.id='"+container+"' and sparcsn4.inv_unit.category='IMPRT' order by sparcsn4.inv_unit.gkey desc LIMIT 1";
-
-
-
-                                    sqlMloQuery="select ref_bizunit_scoped.id as rtnValue,inv_unit.id\n" +
-                                            "from inv_unit\n" +
-                                            "inner join ref_bizunit_scoped on ref_bizunit_scoped.gkey=inv_unit.line_op\n" +
-                                            "where inv_unit.id='"+container+"' and inv_unit.category='IMPRT' order by inv_unit.gkey desc fetch first 1 rows only";
-
-
-                            sqlMloQueryList=OracleDbTemplate.query(sqlMloQuery,new UploadExportContainerExceFileService.RtnValue());
+                            sqlMloQuery="select sparcsn4.ref_bizunit_scoped.id as rtnValue\n" +
+                                    "\t\t\t\tfrom sparcsn4.inv_unit\n" +
+                                    "\t\t\t\tinner join sparcsn4.ref_bizunit_scoped on sparcsn4.ref_bizunit_scoped.gkey=sparcsn4.inv_unit.line_op\n" +
+                                    "\t\t\t\twhere sparcsn4.inv_unit.id='"+container+"' and sparcsn4.inv_unit.category='IMPRT' order by sparcsn4.inv_unit.gkey desc LIMIT 1";
+                            sqlMloQueryList=secondaryDBTemplate.query(sqlMloQuery,new UploadExportContainerExceFileService.RtnValue());
                             if(sqlMloQueryList.size()>0){
                                 mlo=sqlMloQueryList.get(0).getRtnValue()+"";
                             }
@@ -342,27 +311,14 @@ public class UploadExportContainerExceFileService {
                     if(iso.equals("")){
                         List<UploadExportContainer> getIsoTypeQryList=new ArrayList<>();
                        String getIsoTypeQry="";
-//                        getIsoTypeQry="select sparcsn4.ref_equip_type.id as iso\n" +
-//                                "\t\t\t\tfrom ctmsmis.mis_exp_unit\n" +
-//                                "\t\t\t\tleft join sparcsn4.inv_unit on sparcsn4.inv_unit.gkey=ctmsmis.mis_exp_unit.gkey \n" +
-//                                "\t\t\t\tinner join sparcsn4.inv_unit_equip on sparcsn4.inv_unit_equip.unit_gkey=sparcsn4.inv_unit.gkey\n" +
-//                                "\t\t\t\tinner join sparcsn4.ref_equipment on sparcsn4.ref_equipment.gkey=sparcsn4.inv_unit_equip.eq_gkey\n" +
-//                                "\t\t\t\tinner join sparcsn4.ref_equip_type on sparcsn4.ref_equip_type.gkey=sparcsn4.ref_equipment.eqtyp_gkey\n" +
-//                                "\t\t\t\twhere mis_exp_unit.vvd_gkey='"+vvdGkey+"' and mis_exp_unit.cont_id='"+container+"'\n" +
-//                                "\t\t\t\tAND mis_exp_unit.preAddStat='0' and snx_type=0 and mis_exp_unit.delete_flag='0'";
-
-
-                                getIsoTypeQry="SELECT ref_equip_type.id as iso,vsl_vessel_visit_details.vvd_gkey,inv_unit.gkey\n" +
-                                        "FROM inv_unit\n" +
-                                        "INNER JOIN inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey\n" +
-                                        "INNER JOIN argo_carrier_visit ON argo_carrier_visit.gkey=inv_unit_fcy_visit.actual_ob_cv\n" +
-                                        "INNER JOIN argo_visit_details ON argo_visit_details.gkey=argo_carrier_visit.cvcvd_gkey \n" +
-                                        "INNER JOIN vsl_vessel_visit_details ON vsl_vessel_visit_details.vvd_gkey=argo_visit_details.gkey \n" +
-                                        "INNER JOIN ref_equipment ON ref_equipment.gkey=inv_unit.eq_gkey\n" +
-                                        "INNER JOIN ref_equip_type ON ref_equipment.eqtyp_gkey=ref_equip_type.gkey \n" +
-                                        "WHERE  inv_unit.gkey='"+vvdGkey+"'";
-
-
+                        getIsoTypeQry="select sparcsn4.ref_equip_type.id as iso\n" +
+                                "\t\t\t\tfrom ctmsmis.mis_exp_unit\n" +
+                                "\t\t\t\tleft join sparcsn4.inv_unit on sparcsn4.inv_unit.gkey=ctmsmis.mis_exp_unit.gkey \n" +
+                                "\t\t\t\tinner join sparcsn4.inv_unit_equip on sparcsn4.inv_unit_equip.unit_gkey=sparcsn4.inv_unit.gkey\n" +
+                                "\t\t\t\tinner join sparcsn4.ref_equipment on sparcsn4.ref_equipment.gkey=sparcsn4.inv_unit_equip.eq_gkey\n" +
+                                "\t\t\t\tinner join sparcsn4.ref_equip_type on sparcsn4.ref_equip_type.gkey=sparcsn4.ref_equipment.eqtyp_gkey\n" +
+                                "\t\t\t\twhere mis_exp_unit.vvd_gkey='"+vvdGkey+"' and mis_exp_unit.cont_id='"+container+"'\n" +
+                                "\t\t\t\tAND mis_exp_unit.preAddStat='0' and snx_type=0 and mis_exp_unit.delete_flag='0'";
                         getIsoTypeQryList=secondaryDBTemplate.query(getIsoTypeQry,new UploadExportContainerExceFileService.Iso());
                         if(getIsoTypeQryList.size()>0){
                             iso=getIsoTypeQryList.get(0).getIso();
@@ -371,23 +327,18 @@ public class UploadExportContainerExceFileService {
                     }
                     List<UploadExportContainer> strCountQueryList=new ArrayList<>();
                    String strCountQuery="";
-                    strCountQuery="SELECT COUNT(gkey) AS rtnValue FROM mis_exp_unit WHERE vvd_gkey='"+vvdGkey+"' AND cont_id='"+container+"' and snx_type=0";
-                    strCountQueryList=primaryDBTemplate.query(strCountQuery,new UploadExportContainerExceFileService.RtnValue());
+                    strCountQuery="SELECT COUNT(gkey) AS rtnValue FROM ctmsmis.mis_exp_unit WHERE vvd_gkey='"+vvdGkey+"' AND cont_id='"+container+"' and snx_type=0";
+                    strCountQueryList=secondaryDBTemplate.query(strCountQuery,new UploadExportContainerExceFileService.RtnValue());
                     if(strCountQueryList.size()>0){
                         count=strCountQueryList.get(0).getRtnValue();
                     }
                     List<UploadExportContainer> strSizeHeightGroupQueryList=new ArrayList<>();
                     String strSizeHeightGroupQuery="";
-//                    strSizeHeightGroupQuery="SELECT \n" +
-//                            "\t\t\tRIGHT(sparcsn4.ref_equip_type.nominal_length,2) AS size,\n" +
-//                            "\t\t\tRIGHT(sparcsn4.ref_equip_type.nominal_height,2) AS height,\n" +
-//                            "\t\t\tsparcsn4.ref_equip_type.iso_group AS isogroup \n" +
-//                            "\t\t\tFROM sparcsn4.ref_equip_type WHERE id='"+iso+"'";
-
-                    strSizeHeightGroupQuery="SELECT ref_equip_type.id,\n" +
-                            "SUBSTR(ref_equip_type.nominal_length,-2, LENGTH( ref_equip_type.nominal_length)) AS cont_size, SUBSTR(ref_equip_type.nominal_height, -2, LENGTH( ref_equip_type.nominal_height)) AS height,\n" +
-                            "ref_equip_type.iso_group AS isogroup \n" +
-                            "FROM ref_equip_type WHERE id='"+iso+"'";
+                    strSizeHeightGroupQuery="SELECT \n" +
+                            "\t\t\tRIGHT(sparcsn4.ref_equip_type.nominal_length,2) AS size,\n" +
+                            "\t\t\tRIGHT(sparcsn4.ref_equip_type.nominal_height,2) AS height,\n" +
+                            "\t\t\tsparcsn4.ref_equip_type.iso_group AS isogroup \n" +
+                            "\t\t\tFROM sparcsn4.ref_equip_type WHERE id='"+iso+"'";
                     strSizeHeightGroupQueryList=secondaryDBTemplate.query(strSizeHeightGroupQuery,new UploadExportContainerExceFileService.SizeHeightGroup());
                     if(strSizeHeightGroupQueryList.size()>0){
                         size=strSizeHeightGroupQueryList.get(0).getSize();
@@ -401,30 +352,30 @@ public class UploadExportContainerExceFileService {
                             String strPgkeyQuery="";
                             String  strUpdateQuery = "";
                             String sqlUpdatelogQuery="";
-                            strPgkeyQuery="SELECT gkey AS rtnValue FROM mis_exp_unit WHERE vvd_gkey='"+vvdGkey+"' AND cont_id='"+container+"' and snx_type=0";
-                            strPgkeyQueryList=primaryDBTemplate.query(strPgkeyQuery,new UploadExportContainerExceFileService.RtnValue());
+                            strPgkeyQuery="SELECT gkey AS rtnValue FROM ctmsmis.mis_exp_unit WHERE vvd_gkey='"+vvdGkey+"' AND cont_id='"+container+"' and snx_type=0";
+                            strPgkeyQueryList=secondaryDBTemplate.query(strPgkeyQuery,new UploadExportContainerExceFileService.RtnValue());
                             if(strPgkeyQueryList.size()>0){
                                 presentGky=strPgkeyQueryList.get(0).getRtnValue();
 
                             }
                             if(!(presentGky.equals(gkey))){
-                                strUpdateQuery="UPDATE mis_exp_unit_copy SET gkey='"+gkey+"',cont_id='"+container+"',isoType='"+iso+"',cont_size='"+size+"',cont_height='"+height+"',isoGroup='"+isoGroup+"',cont_status='"+cont_status+"',cont_mlo='"+mlo+"',vvd_gkey='"+vvdGkey+"',rotation='"+rotation+"',stowage_pos='"+stowage+"',user_id='"+updateby+"',seal_no='"+seal_no+"',goods_and_ctr_wt_kg='"+weight+"',pod='"+pod+"',truck_no='"+truck_no+"',re_status=1,craine_id='"+craine_id+"',last_update=NOW(),updated_in_n4=1,coming_from='"+coming_from+"',shift='"+shift+"',date='"+date+"' WHERE cont_id='"+container+"' AND vvd_gkey='"+vvdGkey+"' and snx_type=0";
+                                strUpdateQuery="UPDATE ctmsmis.mis_exp_unit_copy SET gkey='"+gkey+"',cont_id='"+container+"',isoType='"+iso+"',cont_size='"+size+"',cont_height='"+height+"',isoGroup='"+isoGroup+"',cont_status='"+cont_status+"',cont_mlo='"+mlo+"',vvd_gkey='"+vvdGkey+"',rotation='"+rotation+"',stowage_pos='"+stowage+"',user_id='"+updateby+"',seal_no='"+seal_no+"',goods_and_ctr_wt_kg='"+weight+"',pod='"+pod+"',truck_no='"+truck_no+"',re_status=1,craine_id='"+craine_id+"',last_update=NOW(),updated_in_n4=1,coming_from='"+coming_from+"',shift='"+shift+"',date='"+date+"' WHERE cont_id='"+container+"' AND vvd_gkey='"+vvdGkey+"' and snx_type=0";
 
                             }
                             else{
-                                strUpdateQuery="UPDATE mis_exp_unit_copy SET gkey='"+gkey+"',cont_id='"+container+"',isoType='"+iso+"',cont_size='"+size+"',cont_height='"+height+"',isoGroup='"+isoGroup+"',cont_status='"+cont_status+"',cont_mlo='"+mlo+"',vvd_gkey='"+vvdGkey+"',rotation='"+rotation+"',stowage_pos='"+stowage+"',user_id='"+updateby+"',seal_no='"+seal_no+"',goods_and_ctr_wt_kg='"+weight+"',pod='"+pod+"',truck_no='"+truck_no+"',re_status=1,craine_id='"+craine_id+"',updated_in_n4=1,coming_from='"+coming_from+"',shift='"+shift+"',date='"+date+"' WHERE cont_id='"+container+"' AND vvd_gkey='"+vvdGkey+"' and snx_type=0";
+                                strUpdateQuery="UPDATE ctmsmis.mis_exp_unit_copy SET gkey='"+gkey+"',cont_id='"+container+"',isoType='"+iso+"',cont_size='"+size+"',cont_height='"+height+"',isoGroup='"+isoGroup+"',cont_status='"+cont_status+"',cont_mlo='"+mlo+"',vvd_gkey='"+vvdGkey+"',rotation='"+rotation+"',stowage_pos='"+stowage+"',user_id='"+updateby+"',seal_no='"+seal_no+"',goods_and_ctr_wt_kg='"+weight+"',pod='"+pod+"',truck_no='"+truck_no+"',re_status=1,craine_id='"+craine_id+"',updated_in_n4=1,coming_from='"+coming_from+"',shift='"+shift+"',date='"+date+"' WHERE cont_id='"+container+"' AND vvd_gkey='"+vvdGkey+"' and snx_type=0";
                             }
 
                             //run update query here
-                            yes=primaryDBTemplate.update(strUpdateQuery);
-                            System.out.println("Update mis_exp_unit_copy "+yes+" container "+container);
+                            yes=secondaryDBTemplate.update(strUpdateQuery);
+                            System.out.println("Updatemis_exp_unit_copy "+yes+" container "+container);
 
 
-                            sqlUpdatelogQuery="INSERT INTO mis_exp_unit_update_log_copy(cont_id,rotation,update_at,update_by,ip_address)\n" +
+                            sqlUpdatelogQuery="INSERT INTO ctmsmis.mis_exp_unit_update_log_copy(cont_id,rotation,update_at,update_by,ip_address)\n" +
                                     "VALUES('"+container+"','"+rotation+"',NOW(),'"+updateby+"','"+ip+"')";
 
                             //run Insert query here
-                            yes=primaryDBTemplate.update(sqlUpdatelogQuery);
+                            yes=secondaryDBTemplate.update(sqlUpdatelogQuery);
                             System.out.println("Insertmis_exp_unit_update_log_copy "+yes);
 
 
@@ -432,9 +383,9 @@ public class UploadExportContainerExceFileService {
                         }
                     else{
                        String  strInsertQuery="";
-                       strInsertQuery="INSERT INTO mis_exp_unit_copy(gkey,cont_id,cont_status,cont_mlo,isoType,cont_size,cont_height,isoGroup,vvd_gkey,rotation,stowage_pos,last_update,updated_in_n4,user_id,seal_no,goods_and_ctr_wt_kg,pod,truck_no,re_status,craine_id,coming_from,shift,date) \n" +
+                       strInsertQuery="INSERT INTO ctmsmis.mis_exp_unit_copy(gkey,cont_id,cont_status,cont_mlo,isoType,cont_size,cont_height,isoGroup,vvd_gkey,rotation,stowage_pos,last_update,updated_in_n4,user_id,seal_no,goods_and_ctr_wt_kg,pod,truck_no,re_status,craine_id,coming_from,shift,date) \n" +
                                "VALUES ('"+gkey+"','"+container+"','"+cont_status+"','"+mlo+"','"+iso+"','"+size+"','"+height+"','"+isoGroup+"','"+vvdGkey+"','"+rotation+"','"+stowage+"',now(),1,'"+updateby+"','"+seal_no+"','"+weight+"','"+pod+"','"+truck_no+"',1,'"+craine_id+"','"+coming_from+"','"+shift+"','"+date+"')";
-                        yes=primaryDBTemplate.update(strInsertQuery);
+                        yes=secondaryDBTemplate.update(strInsertQuery);
                         System.out.println("Insertmis_exp_unit_copy "+yes);
 
                     }
@@ -476,13 +427,14 @@ public class UploadExportContainerExceFileService {
 
       /* for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) {
            // Test tempStudent = new Test();
+
           //  XSSFRow row = worksheet.getRow(i);
+
           //  tempStudent.setId((int) row.getCell(0).getNumericCellValue());
           //  tempStudent.setContent(row.getCell(1).getStringCellValue());
           //  tempStudentList.add(tempStudent);
+
         }*/
-
-
        return resultList;
     }
     class RtnValue implements RowMapper{
@@ -514,7 +466,7 @@ public class UploadExportContainerExceFileService {
         @Override
         public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
             UploadExportContainer uploadExportContainer=new UploadExportContainer();
-            uploadExportContainer.setSize(rs.getInt("cont_size"));
+            uploadExportContainer.setSize(rs.getInt("size"));
             uploadExportContainer.setHeight(rs.getInt("height"));
             uploadExportContainer.setIsogroup(rs.getString("isogroup"));
             return uploadExportContainer;

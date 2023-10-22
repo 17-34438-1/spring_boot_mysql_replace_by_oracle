@@ -19,17 +19,11 @@ public class YardBlockService {
     @Qualifier("jdbcTemplateSecondary")
     private JdbcTemplate secondaryDBTemplate;
 
-    @Autowired
-    @Qualifier("jdbcTemplatePrimary")
-    private JdbcTemplate primaryDBTemplate;
-
-
-
     public List yardList() throws SQLException {
 
-        String sqlContInfo = "SELECT * FROM yard_block ORDER BY terminal ASC";
+        String sqlContInfo = "SELECT * FROM ctmsmis.yard_block ORDER BY terminal ASC";
 
-        List yardList = primaryDBTemplate.query(sqlContInfo, new yardBlockList());
+        List yardList = secondaryDBTemplate.query(sqlContInfo, new yardBlockList());
         List listAll = (List) yardList.stream().collect(Collectors.toList());
 
         return listAll;

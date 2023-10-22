@@ -95,9 +95,12 @@ public class UploadExcelFileForPangaonService {
                 Cell cell=row.getCell(2);
                 cellValue=cell.getStringCellValue().trim();
 
-            }catch (NullPointerException e){
+            }
+            catch (NullPointerException e){
 
             }
+
+            
            // HSSFRow row=worksheet.getRow(i);
          //   Cell cell=row.getCell(2);
 
@@ -105,8 +108,7 @@ public class UploadExcelFileForPangaonService {
                 cellValue=worksheet.getRow(i).getCell(2).getStringCellValue();
             }*/
 
-
-           // cellValue=worksheet.getRow(i).getCell(2).getStringCellValue();
+          // cellValue=worksheet.getRow(i).getCell(2).getStringCellValue();
             System.out.println(cellValue+" i: "+ i);
             if(!cellValue.equals("")){
                 totalResultRow=totalResultRow+1;

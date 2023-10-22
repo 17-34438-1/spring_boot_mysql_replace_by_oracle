@@ -92,12 +92,15 @@ public class IsoCodeService {
             System.out.println("isoCodeResult:"+cont_iso_type );
             if(isoCodeResult[i].get(1)!=null){
                 cont_size = isoCodeResult[i].get(1).toString();
+
                 System.out.println("cont_size:"+cont_size );
             }
             else{
                 cont_iso_type="";
             }
+
             isoCode.setCont_size(cont_size);
+
 
             if(isoCodeResult[i].get(2)!=null){
                 cont_height = isoCodeResult[i].get(2).toString();

@@ -19,12 +19,11 @@ public class DgContDischargeListForRotationService<dgContDischargeListByRotation
     private JdbcTemplate pirmaryDBTemplate;
 
     List<DgContDischargeListByRotation> dgContDischargeListByRotations;
-
     public List DgContDischargeForRotationList(String rotation) throws SQLException {
         String import_Rotation_No = rotation.replace("_", "/");
         System.out.println(import_Rotation_No);
 
-        Connection con42 = DriverManager.getConnection("jdbc:mysql://172.16.10.21/cchaportdb","user1","user1test");
+        Connection con42 = DriverManager.getConnection("jdbc:mysql://192.168.16.42/cchaportdb","user1","user1test");
         Statement st42 = con42.createStatement();
 
         dgContDischargeListByRotations = new ArrayList<>();

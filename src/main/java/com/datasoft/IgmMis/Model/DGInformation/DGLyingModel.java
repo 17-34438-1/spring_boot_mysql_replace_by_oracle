@@ -16,7 +16,7 @@ import javax.persistence.Id;
 public class DGLyingModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public String vessel_Name;
+	public String vessel_Name;
     public String Import_Rotation_No;
     public String arrival_dt ;
     public String cont_number;

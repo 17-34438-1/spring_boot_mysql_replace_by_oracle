@@ -112,6 +112,9 @@ public class TodaysEdiDeclarationService {
         List listAll = (List) result.stream().collect(Collectors.toList());
         return listAll;
     }
+
+
+
     class EdiDeclarationById implements RowMapper {
         @Override
         public TodaysEdiDeclaration mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -123,6 +126,9 @@ public class TodaysEdiDeclarationService {
             return todaysEdiDeclaration;
         }
     }
+
+
+    
     class UpdateInformation implements RowMapper {
         @Override
         public TodaysEdiDeclaration mapRow(ResultSet rs, int rowNum) throws SQLException {

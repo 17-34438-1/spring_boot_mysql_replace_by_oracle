@@ -18,36 +18,26 @@ public class ExportBlankBayViewService {
     @Autowired
     @Qualifier("jdbcTemplateSecondary")
     private JdbcTemplate secondaryDBTemplate;
-
-    @Autowired
-    @Qualifier("jdbcTemplateOracle")
-    private JdbcTemplate OracleDbTemplate;
-    
-
-    @Autowired
-    @Qualifier("jdbcTemplatePrimary")
-    private JdbcTemplate primaryDBTemplate;
-
     public List getVesselList(){
         String sqlQuery="";
-        sqlQuery="select distinct vsl_vessel_visit_details.vvd_gkey,CONCAT((vsl_vessels.name),CONCAT('-',(vsl_vessel_visit_details.ib_vyg)) ) AS vsl\n" +
-                "from vsl_vessel_visit_details\n" +
-                "inner join argo_carrier_visit on argo_carrier_visit.cvcvd_gkey=vsl_vessel_visit_details.vvd_gkey\n" +
-                "inner join vsl_vessels on vsl_vessels.gkey=vsl_vessel_visit_details.vessel_gkey\n" +
-                "where argo_carrier_visit.phase not in('80CANCELED','70CLOSED')";
-        List resultList=OracleDbTemplate.query(sqlQuery,new ExportBlankBayViewService.VesselList());
+        sqlQuery="select distinct sparcsn4.vsl_vessel_visit_details.vvd_gkey,concat(sparcsn4.vsl_vessels.name,'-',sparcsn4.vsl_vessel_visit_details.ib_vyg) as vsl\n" +
+                "\t\t\tfrom sparcsn4.vsl_vessel_visit_details\n" +
+                "\t\t\tinner join sparcsn4.argo_carrier_visit on sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                "\t\t\tinner join sparcsn4.vsl_vessels on sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
+                "\t\t\twhere sparcsn4.argo_carrier_visit.phase not in('80CANCELED','70CLOSED') order by sparcsn4.argo_carrier_visit.phase desc";
+        List resultList=secondaryDBTemplate.query(sqlQuery,new ExportBlankBayViewService.VesselList());
         List listAll = (List) resultList.stream().collect(Collectors.toList());
         return listAll;
     }
     public List getBlankBayVesselInfo(Integer vvdgkey) {
         List<ImportCotainerBayViewModel> vesselInfoList=new ArrayList<>();
         String sqlQuery="";
-        sqlQuery="select vsl_vessels.id,vsl_vessels.name\n" +
-                "from vsl_vessel_visit_details\n" +
-                "inner join vsl_vessels on vsl_vessels.gkey=vsl_vessel_visit_details.vessel_gkey\n" +
-                "where vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
+        sqlQuery="select sparcsn4.vsl_vessels.id,sparcsn4.vsl_vessels.name\n" +
+                "from sparcsn4.vsl_vessel_visit_details\n" +
+                "inner join sparcsn4.vsl_vessels on sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
+                "where sparcsn4.vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
 
-        vesselInfoList=OracleDbTemplate.query(sqlQuery,new ExportBlankBayViewService.VesselInfo());
+        vesselInfoList=secondaryDBTemplate.query(sqlQuery,new ExportBlankBayViewService.VesselInfo());
         return vesselInfoList;
 
     }
@@ -56,13 +46,12 @@ public class ExportBlankBayViewService {
         List<ImportCotainerBayViewModel> resultList=new ArrayList<>();
         List<ImportCotainerBayViewModel> vesselInfoList=new ArrayList<>();
         String sqlQuery="";
-        sqlQuery="select vsl_vessels.id,vsl_vessels.name\n" +
-                "from vsl_vessel_visit_details\n" +
-                "inner join vsl_vessels on vsl_vessels.gkey=vsl_vessel_visit_details.vessel_gkey\n" +
-                "where vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
+        sqlQuery="select sparcsn4.vsl_vessels.id,sparcsn4.vsl_vessels.name\n" +
+                "from sparcsn4.vsl_vessel_visit_details\n" +
+                "inner join sparcsn4.vsl_vessels on sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
+                "where sparcsn4.vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
 
-
-        vesselInfoList=OracleDbTemplate.query(sqlQuery,new ExportBlankBayViewService.VesselInfo());
+        vesselInfoList=secondaryDBTemplate.query(sqlQuery,new ExportBlankBayViewService.VesselInfo());
         String vesselId="";
         String vesselName="";
         String rotation="";
@@ -76,9 +65,9 @@ public class ExportBlankBayViewService {
 
         }
 
-        sqlQuery="select * from misBayView where vslId='"+vesselId+"' order by bay asc";
+        sqlQuery="select * from ctmsmis.misBayView where vslId='"+vesselId+"' order by bay asc";
         System.out.println(sqlQuery);
-        resultList=primaryDBTemplate.query(sqlQuery,new ExportBlankBayViewService.MisBayView());
+        resultList=secondaryDBTemplate.query(sqlQuery,new ExportBlankBayViewService.MisBayView());
         Integer mystat = 0;
         for(int i=0; i< resultList.size(); i++ ){
             ImportContainerBayViewMainModel resultModel=new ImportContainerBayViewMainModel();
@@ -141,8 +130,8 @@ public class ExportBlankBayViewService {
 
 
             String strMaxColQuery="";
-            strMaxColQuery = "select max(maxColLimit) as maxCol from misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"'";
-            List<ImportCotainerBayViewModel> maxColList=primaryDBTemplate.query(strMaxColQuery,new ExportBlankBayViewService.MaxCol());
+            strMaxColQuery = "select max(maxColLimit) as maxCol from ctmsmis.misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"'";
+            List<ImportCotainerBayViewModel> maxColList=secondaryDBTemplate.query(strMaxColQuery,new ExportBlankBayViewService.MaxCol());
             Integer maxCol=0;
 
             if(maxColList.size()>0){
@@ -152,8 +141,8 @@ public class ExportBlankBayViewService {
             resultModel.setMaxCol(maxCol);
             resultModel.setTitle(title);
             String  strUpDeckLblQuery="";
-            strUpDeckLblQuery = "select minColLimit,maxColLimit from misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"'";
-            List<ImportCotainerBayViewModel> maxAndMInColList=primaryDBTemplate.query(strUpDeckLblQuery,new ExportBlankBayViewService.MaxAndMInCOlLImit());
+            strUpDeckLblQuery = "select minColLimit,maxColLimit from ctmsmis.misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"'";
+            List<ImportCotainerBayViewModel> maxAndMInColList=secondaryDBTemplate.query(strUpDeckLblQuery,new ExportBlankBayViewService.MaxAndMInCOlLImit());
             Integer minColLimit=0;
             Integer kl=0;
             if(maxAndMInColList.size()>0){
@@ -243,10 +232,11 @@ public class ExportBlankBayViewService {
 
                 ImportContainerBayViewTempModel daynamicRowModel= new ImportContainerBayViewTempModel();
                 String strUpDeck="";
-                strUpDeck = "select minColLimit,maxColLimit from misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"' and bayRow='"+ivalue+"'";
+                strUpDeck = "select minColLimit,maxColLimit from ctmsmis.misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"' and bayRow='"+ivalue+"'";
 
-                List<ImportCotainerBayViewModel> resUpDeckList=primaryDBTemplate.query(strUpDeck,new ExportBlankBayViewService.MaxAndMInCOlLImit());
+                List<ImportCotainerBayViewModel> resUpDeckList=secondaryDBTemplate.query(strUpDeck,new ExportBlankBayViewService.MaxAndMInCOlLImit());
                 System.out.println(resUpDeckList.size());
+                // Integer minColLimitUp=0;
                 Integer maxColLimitUp=0;
                 Integer k=0;
 
@@ -415,8 +405,8 @@ public class ExportBlankBayViewService {
                     Integer minColLimitBelow=0;
                     Integer maxColLimitBelow=0;
                     Integer kbelow=0;
-                    strBlDeck="select minColLimit,maxColLimit from misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"' and bayRow='"+b+"'";
-                    resBlDeck=primaryDBTemplate.query(strBlDeck,new ExportBlankBayViewService.MaxAndMInCOlLImit());
+                    strBlDeck="select minColLimit,maxColLimit from ctmsmis.misBayViewBelow where vslId='"+vesselId+"' and bay='"+importCotainerBayViewModel.getBay()+"' and bayRow='"+b+"'";
+                    resBlDeck=secondaryDBTemplate.query(strBlDeck,new ExportBlankBayViewService.MaxAndMInCOlLImit());
                     if(resBlDeck.size()> 0){
                         minColLimitBelow = resBlDeck.get(0).getMinColLimit();
                         maxColLimitBelow = resBlDeck.get(0).getMaxColLimit();

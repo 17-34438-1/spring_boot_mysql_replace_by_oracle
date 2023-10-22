@@ -21,16 +21,14 @@ public class ExportVesselListWithStatusService {
     @Autowired
     @Qualifier("jdbcTemplatePrimary")
     private JdbcTemplate primaryDBTemplate;
-    @Autowired
-    @Qualifier("jdbcTemplateOracle")
-    private JdbcTemplate OracleDbTemplate;
+
     public Integer getVesselListvvdGkey(String rotation){
         String sqlQuery="";
         Integer vvdgkey=0;
-        sqlQuery="SELECT vvd_gkey FROM vsl_vessel_visit_details WHERE ib_vyg='"+rotation+"'";
+        sqlQuery="SELECT vvd_gkey FROM sparcsn4.vsl_vessel_visit_details WHERE ib_vyg='"+rotation+"'";
 
 
-        List<ExportVesselListWithStatus> resultList=OracleDbTemplate.query(sqlQuery,new VesselListvvdGkey());
+        List<ExportVesselListWithStatus> resultList=SecondaryDBTemplate.query(sqlQuery,new VesselListvvdGkey());
 
         ExportVesselListWithStatus exportVesselListWithStatus;
         for(int i=0;i<resultList.size();i++){
@@ -75,54 +73,35 @@ public class ExportVesselListWithStatusService {
 
     public List getVessleInformation(Integer vvdgkey){
         String sqlQuery="";
-
-//        sqlQuery="SELECT vsl_vessels.name AS vsl_name,IFNULL(sparcsn4.vsl_vessel_visit_details.flex_string02,\n" +
-//                "IFNULL(sparcsn4.vsl_vessel_visit_details.flex_string03,'')) AS berth_op,IFNULL(sparcsn4.argo_quay.id,'') AS berth,\n" +
-//                "DATE(sparcsn4.vsl_vessel_visit_details.published_eta) AS ata,\n" +
-//                "sparcsn4.argo_carrier_visit.atd FROM vsl_vessel_visit_details\n" +
-//                "INNER JOIN sparcsn4.argo_carrier_visit ON sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
-//                "INNER JOIN sparcsn4.vsl_vessel_berthings ON sparcsn4.vsl_vessel_berthings.vvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
-//                "INNER JOIN sparcsn4.vsl_vessels ON sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
-//                "INNER JOIN sparcsn4.argo_quay ON sparcsn4.argo_quay.gkey=sparcsn4.vsl_vessel_berthings.quay\n" +
-//                "WHERE vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
-//
-
-        sqlQuery="SELECT vsl_vessel_visit_details.vvd_gkey,vsl_vessels.name,vsl_vessel_visit_details.ib_vyg,\n" +
-                "vsl_vessel_visit_details.ob_vyg,SUBSTR(argo_carrier_visit.phase, 3, LENGTH( argo_carrier_visit.phase)) AS phase_num,SUBSTR(argo_carrier_visit.phase,3) AS phase_str,argo_visit_details.eta,\n" +
-                "argo_visit_details.etd,argo_carrier_visit.ata,argo_carrier_visit.atd,ref_bizunit_scoped.id AS agent,\n" +
-                "COALESCE(vsl_vessel_visit_details.flex_string02,vsl_vessel_visit_details.flex_string03) AS berthop\n" +
-                "FROM argo_carrier_visit\n" +
-                "INNER JOIN argo_visit_details ON argo_visit_details.gkey=argo_carrier_visit.cvcvd_gkey\n" +
-                "INNER JOIN vsl_vessel_visit_details ON vsl_vessel_visit_details.vvd_gkey=argo_visit_details.gkey\n" +
-                "INNER JOIN vsl_vessels ON vsl_vessels.gkey=vsl_vessel_visit_details.vessel_gkey\n" +
-                "INNER JOIN ref_bizunit_scoped ON ref_bizunit_scoped.gkey=vsl_vessel_visit_details.bizu_gkey\n" +
-                "WHERE vsl_vessel_visit_details.ib_vyg = '"+vvdgkey+"' ORDER BY argo_carrier_visit.phase";
-
-
-        List resultList=OracleDbTemplate.query(sqlQuery,new VessleInformation());
+        sqlQuery="SELECT vsl_vessels.name AS vsl_name,IFNULL(sparcsn4.vsl_vessel_visit_details.flex_string02,\n" +
+                "IFNULL(sparcsn4.vsl_vessel_visit_details.flex_string03,'')) AS berth_op,IFNULL(sparcsn4.argo_quay.id,'') AS berth,\n" +
+                "DATE(sparcsn4.vsl_vessel_visit_details.published_eta) AS ata,\n" +
+                "sparcsn4.argo_carrier_visit.atd FROM vsl_vessel_visit_details\n" +
+                "INNER JOIN sparcsn4.argo_carrier_visit ON sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                "INNER JOIN sparcsn4.vsl_vessel_berthings ON sparcsn4.vsl_vessel_berthings.vvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                "INNER JOIN sparcsn4.vsl_vessels ON sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
+                "INNER JOIN sparcsn4.argo_quay ON sparcsn4.argo_quay.gkey=sparcsn4.vsl_vessel_berthings.quay\n" +
+                "WHERE vsl_vessel_visit_details.vvd_gkey='"+vvdgkey+"'";
+        List resultList=SecondaryDBTemplate.query(sqlQuery,new VessleInformation());
 
         List listAll = (List) resultList.stream().collect(Collectors.toList());
         return listAll;
     }
     public List getVessleListStatusWithRotation(String rotation){
         String sqlQuery="";
-//        sqlQuery="\n" +
-//                "SELECT sparcsn4.vsl_vessel_visit_details.vvd_gkey,sparcsn4.vsl_vessels.name,sparcsn4.vsl_vessel_visit_details.ib_vyg,sparcsn4.vsl_vessel_visit_details.ob_vyg,\n" +
-//                "LEFT(sparcsn4.argo_carrier_visit.phase,2) AS phase_num,SUBSTR(sparcsn4.argo_carrier_visit.phase,3) AS phase_str,sparcsn4.argo_visit_details.eta,\n" +
-//                "sparcsn4.argo_visit_details.etd,sparcsn4.argo_carrier_visit.ata,\n" +
-//                "sparcsn4.argo_carrier_visit.atd,sparcsn4.ref_bizunit_scoped.id AS agent,\n" +
-//                "IFNULL(sparcsn4.vsl_vessel_visit_details.flex_string02,sparcsn4.vsl_vessel_visit_details.flex_string03) AS berthop\n" +
-//                "FROM sparcsn4.argo_carrier_visit\n" +
-//                "INNER JOIN sparcsn4.argo_visit_details ON sparcsn4.argo_visit_details.gkey=sparcsn4.argo_carrier_visit.cvcvd_gkey\n" +
-//                "INNER JOIN sparcsn4.vsl_vessel_visit_details ON sparcsn4.vsl_vessel_visit_details.vvd_gkey=sparcsn4.argo_visit_details.gkey\n" +
-//                "INNER JOIN sparcsn4.vsl_vessels ON sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
-//                "INNER JOIN sparcsn4.ref_bizunit_scoped ON sparcsn4.ref_bizunit_scoped.gkey=sparcsn4.vsl_vessel_visit_details.bizu_gkey\n" +
-//                "WHERE sparcsn4.vsl_vessel_visit_details.ib_vyg = '"+rotation+"'\n" +
-//                "ORDER BY sparcsn4.argo_carrier_visit.phase\n";
-
-
-                sqlQuery="";
-
+        sqlQuery="\n" +
+                "SELECT sparcsn4.vsl_vessel_visit_details.vvd_gkey,sparcsn4.vsl_vessels.name,sparcsn4.vsl_vessel_visit_details.ib_vyg,sparcsn4.vsl_vessel_visit_details.ob_vyg,\n" +
+                "LEFT(sparcsn4.argo_carrier_visit.phase,2) AS phase_num,SUBSTR(sparcsn4.argo_carrier_visit.phase,3) AS phase_str,sparcsn4.argo_visit_details.eta,\n" +
+                "sparcsn4.argo_visit_details.etd,sparcsn4.argo_carrier_visit.ata,\n" +
+                "sparcsn4.argo_carrier_visit.atd,sparcsn4.ref_bizunit_scoped.id AS agent,\n" +
+                "IFNULL(sparcsn4.vsl_vessel_visit_details.flex_string02,sparcsn4.vsl_vessel_visit_details.flex_string03) AS berthop\n" +
+                "FROM sparcsn4.argo_carrier_visit\n" +
+                "INNER JOIN sparcsn4.argo_visit_details ON sparcsn4.argo_visit_details.gkey=sparcsn4.argo_carrier_visit.cvcvd_gkey\n" +
+                "INNER JOIN sparcsn4.vsl_vessel_visit_details ON sparcsn4.vsl_vessel_visit_details.vvd_gkey=sparcsn4.argo_visit_details.gkey\n" +
+                "INNER JOIN sparcsn4.vsl_vessels ON sparcsn4.vsl_vessels.gkey=sparcsn4.vsl_vessel_visit_details.vessel_gkey\n" +
+                "INNER JOIN sparcsn4.ref_bizunit_scoped ON sparcsn4.ref_bizunit_scoped.gkey=sparcsn4.vsl_vessel_visit_details.bizu_gkey\n" +
+                "WHERE sparcsn4.vsl_vessel_visit_details.ib_vyg = '"+rotation+"'\n" +
+                "ORDER BY sparcsn4.argo_carrier_visit.phase\n";
         List resultList=SecondaryDBTemplate.query(sqlQuery,new VessleListStatusWithRotation());
 
         List listAll = (List) resultList.stream().collect(Collectors.toList());

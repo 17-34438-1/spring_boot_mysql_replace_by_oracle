@@ -16,18 +16,14 @@ public class DgContainerByRotationService {
 
     @Autowired
     @Qualifier("jdbcTemplatePrimary")
-    private JdbcTemplate primaryDBTemplate;
-
-
+    private JdbcTemplate PrimaryDBTemplate;
 
 
     @Autowired
     @Qualifier("jdbcTemplateSecondary")
-    private JdbcTemplate secondaryDBTemplate;
+    private JdbcTemplate SecondaryDBTemplate;
 
-    @Autowired
-    @Qualifier("jdbcTemplateOracle")
-    private JdbcTemplate OracleDbTemplate;
+
 
     public List DgContainerByRotation(String srotation) {
 
@@ -82,7 +78,7 @@ public class DgContainerByRotationService {
                 "AND (cont_imo <> '' OR igms_sup.imco <> '' OR igms_sup.un <> '')\n" +
                 "\n";
         System.out.println(Query);
-        List<DgContainerByRotation> resultList=primaryDBTemplate.query(Query,new DgContainerByRotationReport());
+        List<DgContainerByRotation> resultList=PrimaryDBTemplate.query(Query,new DgContainerByRotationReport());
 
         System.out.println(resultList);
         DgContainerByRotation dgContainerByRotation;
@@ -120,29 +116,17 @@ public class DgContainerByRotationService {
             dgContainerByRotation.setDescription_of_Goods(rs.getString("Description_of_Goods"));
             dgContainerByRotation.setRemarks(rs.getString("Remarks"));
 
-
-//            String Query="SELECT inv_unit_fcy_visit.time_out,sparcsn4.argo_carrier_visit.ata,r.id AS mlo, sparcsn4.argo_quay.id AS berth\n" +
-//                    "FROM inv_unit \n" +
-//                    "INNER JOIN sparcsn4.inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey \n" +
-//                    "INNER JOIN sparcsn4.argo_carrier_visit ON sparcsn4.inv_unit_fcy_visit.actual_ib_cv=sparcsn4.argo_carrier_visit.gkey \n" +
-//                    "INNER JOIN sparcsn4.vsl_vessel_visit_details ON sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
-//                    "INNER JOIN sparcsn4.ref_bizunit_scoped r ON r.gkey=inv_unit.line_op \n" +
-//                    "LEFT JOIN sparcsn4.vsl_vessel_berthings ON sparcsn4.vsl_vessel_berthings.vvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
-//                    "LEFT JOIN sparcsn4.argo_quay ON sparcsn4.argo_quay.gkey=sparcsn4.vsl_vessel_berthings.quay\n" +
-//                    "WHERE inv_unit.id ='"+cont_number+"' AND vsl_vessel_visit_details.ib_vyg='"+import_Rotation_no+"'";
-
-            String Query = "SELECT inv_unit_fcy_visit.time_out,argo_carrier_visit.ata,r.id AS mlo, argo_quay.id AS berth\n" +
-                    "FROM inv_unit\n" +
-                    "INNER JOIN inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey\n" +
-                    "INNER JOIN argo_carrier_visit ON inv_unit_fcy_visit.actual_ib_cv=argo_carrier_visit.gkey\n" +
-                    "INNER JOIN vsl_vessel_visit_details ON argo_carrier_visit.cvcvd_gkey=vsl_vessel_visit_details.vvd_gkey\n" +
-                    "INNER JOIN ref_bizunit_scoped r ON r.gkey=inv_unit.line_op\n" +
-                    "LEFT JOIN vsl_vessel_berthings ON vsl_vessel_berthings.vvd_gkey=vsl_vessel_visit_details.vvd_gkey\n" +
-                    "LEFT JOIN argo_quay ON argo_quay.gkey=vsl_vessel_berthings.quay\n" +
+            String Query="SELECT inv_unit_fcy_visit.time_out,sparcsn4.argo_carrier_visit.ata,r.id AS mlo, sparcsn4.argo_quay.id AS berth\n" +
+                    "FROM inv_unit \n" +
+                    "INNER JOIN sparcsn4.inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey \n" +
+                    "INNER JOIN sparcsn4.argo_carrier_visit ON sparcsn4.inv_unit_fcy_visit.actual_ib_cv=sparcsn4.argo_carrier_visit.gkey \n" +
+                    "INNER JOIN sparcsn4.vsl_vessel_visit_details ON sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                    "INNER JOIN sparcsn4.ref_bizunit_scoped r ON r.gkey=inv_unit.line_op \n" +
+                    "LEFT JOIN sparcsn4.vsl_vessel_berthings ON sparcsn4.vsl_vessel_berthings.vvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                    "LEFT JOIN sparcsn4.argo_quay ON sparcsn4.argo_quay.gkey=sparcsn4.vsl_vessel_berthings.quay\n" +
                     "WHERE inv_unit.id ='"+cont_number+"' AND vsl_vessel_visit_details.ib_vyg='"+import_Rotation_no+"'";
 
-
-            List<DgContainerReport> resultList=OracleDbTemplate.query(Query,new DgContainer_Dalivery_Report());
+            List<DgContainerReport> resultList=SecondaryDBTemplate.query(Query,new DgContainer_Dalivery_Report());
             DgContainerReport dgContainerReport;
             Integer rl_no=0;
             Integer arr=0;

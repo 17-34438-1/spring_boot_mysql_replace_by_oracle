@@ -1,5 +1,6 @@
 package com.datasoft.IgmMis.Service.DGInformation;
 
+import com.datasoft.IgmMis.Model.DGInformation.LyingDgContByYardWise;
 import com.datasoft.IgmMis.Model.DGInformation.DGLyingModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,7 +38,7 @@ public class DGLyingReportService {
         } else if (searchCriteria.equals("date") ) {
             strYard = "";
             strCrt = " yard_lying_info.discharge_dt BETWEEN '"+fromDate+"' and '"+toDate+"' AND";
-            strSupCrt = "yard_lying_info.discharge_dt BETWEEN '"+fromDate+"' and '"+toDate+"' AND";
+            strSupCrt = " yard_lying_info.discharge_dt BETWEEN '"+fromDate+"' and '"+toDate+"' AND";
         } else if (searchCriteria.equals("yard")) {
             strCrt = "";
             strSupCrt = "";
@@ -131,92 +132,62 @@ public class DGLyingReportService {
 //            DGLying_ResultModel.setVessel_Name(dgResltIgm.getVessel_Name());
 //            DGLying_ResultModel.setDelivery_Status_date(dgResltIgm.getDelivery_Status_date());
 
-
-
-//            n4_query = "SELECT * FROM (SELECT inv_unit_fcy_visit.flex_string04 AS rl_no,inv_unit_fcy_visit.flex_string04 AS rl_date,inv_unit_fcy_visit.flex_string07 AS obpc_number,\n" +
-//                    " inv_unit_fcy_visit.flex_string08 AS obpc_date,inv_unit_fcy_visit.time_in, inv_unit_fcy_visit.time_out,\n" +
-//                    " sparcsn4.argo_carrier_visit.ata,r.id as mlo,\n" +
-//                    " IFNULL((SELECT SUBSTRING(sparcsn4.srv_event_field_changes.new_value,7) \n" +
-//                    " FROM sparcsn4.srv_event INNER JOIN sparcsn4.srv_event_field_changes ON sparcsn4.srv_event_field_changes.event_gkey=sparcsn4.srv_event.gkey \n" +
-//                    " WHERE sparcsn4.srv_event.applied_to_gkey=sparcsn4.inv_unit.gkey AND sparcsn4.srv_event.event_type_gkey IN(18,13,16) AND \n" +
-//                    " sparcsn4.srv_event_field_changes.new_value IS NOT NULL AND sparcsn4.srv_event_field_changes.new_value !='' AND \n" +
-//                    " sparcsn4.srv_event_field_changes.new_value !='Y-CGP-.' AND sparcsn4.srv_event.gkey<(SELECT sparcsn4.srv_event.gkey \n" +
-//                    " FROM sparcsn4.srv_event INNER JOIN sparcsn4.srv_event_field_changes ON sparcsn4.srv_event_field_changes.event_gkey=sparcsn4.srv_event.gkey\n" +
-//                    " WHERE sparcsn4.srv_event.event_type_gkey=4 AND sparcsn4.srv_event.applied_to_gkey=sparcsn4.inv_unit.gkey AND metafield_id='unitFlexString01' AND\n" +
-//                    " new_value IS NOT NULL ORDER BY sparcsn4.srv_event_field_changes.gkey DESC LIMIT 1) ORDER BY sparcsn4.srv_event.gkey DESC LIMIT 1),\n" +
-//                    "(SELECT SUBSTRING(sparcsn4.srv_event_field_changes.new_value,7) FROM sparcsn4.srv_event \n" +
-//                    " INNER JOIN sparcsn4.srv_event_field_changes ON sparcsn4.srv_event_field_changes.event_gkey=sparcsn4.srv_event.gkey \n" +
-//                    " WHERE sparcsn4.srv_event.applied_to_gkey=sparcsn4.inv_unit.gkey AND sparcsn4.srv_event.event_type_gkey IN(18,13,16) \n" +
-//                    " ORDER BY sparcsn4.srv_event_field_changes.gkey DESC LIMIT 1)) AS carrentPosition, \n" +
-//                    "\t\n" +
-//                    " (SELECT ctmsmis.cont_yard(carrentPosition)) AS Yard_No, \n" +
-//                    " (SELECT ctmsmis.cont_block(carrentPosition, Yard_No)) AS Block_No\n" +
-//                    " FROM sparcsn4.inv_unit \n" +
-//                    " INNER JOIN sparcsn4.inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey \n" +
-//                    " INNER JOIN sparcsn4.argo_carrier_visit ON sparcsn4.inv_unit_fcy_visit.actual_ib_cv=sparcsn4.argo_carrier_visit.gkey \n" +
-//                    " INNER JOIN sparcsn4.vsl_vessel_visit_details ON sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
-//                    " INNER JOIN sparcsn4.ref_bizunit_scoped r ON r.gkey=inv_unit.line_op \n" +
-//                    " INNER JOIN sparcsn4.inv_goods ON sparcsn4.inv_goods.gkey=sparcsn4.inv_unit.goods\n" +
-//                    " WHERE inv_unit.id ='"+cont_no+"' AND vsl_vessel_visit_details.ib_vyg='"+rot_no+"'\n" +
-//                    " AND sparcsn4.inv_goods.destination='2591'  AND sparcsn4.inv_unit_fcy_visit.transit_state='S40_YARD' AND  inv_unit.category='IMPRT')\n" +
-//                    " AS tmp "+strYard ;
-
-                    n4_query = "SELECT * FROM (SELECT inv_unit_fcy_visit.flex_string04 AS rl_no,inv_unit_fcy_visit.flex_string04 AS rl_date,\n" +
-                            "inv_unit_fcy_visit.flex_string07 AS obpc_number,\n" +
-                            "inv_unit_fcy_visit.flex_string08 AS obpc_date,inv_unit_fcy_visit.time_in, inv_unit_fcy_visit.time_out\n" +
-                            ",argo_carrier_visit.ata,r.id as mlo,NVL((SELECT SUBSTR(srv_event_field_changes.new_value,7)\n" +
-                            "FROM srv_event INNER JOIN srv_event_field_changes ON srv_event_field_changes.event_gkey=srv_event.gkey\n" +
-                            "WHERE srv_event.applied_to_gkey=inv_unit.gkey AND srv_event.event_type_gkey IN(18,13,16) AND \n" +
-                            "srv_event_field_changes.new_value IS NOT NULL AND srv_event_field_changes.new_value !=''\n" +
-                            "AND srv_event_field_changes.new_value !='Y-CGP-.' AND srv_event.gkey<(SELECT srv_event.gkey \n" +
-                            "FROM srv_event INNER JOIN srv_event_field_changes ON srv_event_field_changes.event_gkey=srv_event.gkey\n" +
-                            "WHERE srv_event.event_type_gkey=4 AND srv_event.applied_to_gkey=inv_unit.gkey  AND metafield_id='unitIsCtrSealed' AND\n" +
-                            "new_value IS NOT NULL ORDER BY srv_event_field_changes.gkey DESC FETCH FIRST 1 ROWS ONLY)ORDER BY srv_event.gkey DESC FETCH FIRST 1 ROWS ONLY),\n" +
-                            "(SELECT SUBSTR(srv_event_field_changes.new_value,7) FROM srv_event \n" +
-                            "INNER JOIN srv_event_field_changes ON srv_event_field_changes.event_gkey=srv_event.gkey \n" +
-                            "WHERE srv_event.applied_to_gkey=inv_unit.gkey AND srv_event.event_type_gkey IN(18,13,16) \n" +
-                            "ORDER BY srv_event_field_changes.gkey DESC FETCH FIRST 1 ROWS ONLY)\n" +
-                            ") AS carrentPosition\n" +
-                            "\n" +
-                            "FROM inv_unit \n" +
-                            "INNER JOIN inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey \n" +
-                            "INNER JOIN argo_carrier_visit ON inv_unit_fcy_visit.actual_ib_cv=argo_carrier_visit.gkey \n" +
-                            "INNER JOIN vsl_vessel_visit_details ON argo_carrier_visit.cvcvd_gkey=vsl_vessel_visit_details.vvd_gkey\n" +
-                            "INNER JOIN ref_bizunit_scoped r ON r.gkey=inv_unit.line_op \n" +
-                            "INNER JOIN inv_goods ON inv_goods.gkey=inv_unit.goods\n" +
-                            "WHERE inv_unit.id ='"+cont_no+"' AND vsl_vessel_visit_details.ib_vyg='"+rot_no+"'\n" +
-                            "AND inv_goods.destination='2591' AND inv_unit_fcy_visit.transit_state='S40_YARD' AND inv_unit.category='IMPRT') tmp" ;
-
-
-                             System.out.println("resultn4:" + n4_query);
+            n4_query = "SELECT * FROM (SELECT inv_unit_fcy_visit.flex_string04 AS rl_no,inv_unit_fcy_visit.flex_string04 AS rl_date,inv_unit_fcy_visit.flex_string07 AS obpc_number,\n" +
+                    " inv_unit_fcy_visit.flex_string08 AS obpc_date,inv_unit_fcy_visit.time_in, inv_unit_fcy_visit.time_out,\n" +
+                    " sparcsn4.argo_carrier_visit.ata,r.id as mlo,\n" +
+                    " IFNULL((SELECT SUBSTRING(sparcsn4.srv_event_field_changes.new_value,7) \n" +
+                    " FROM sparcsn4.srv_event INNER JOIN sparcsn4.srv_event_field_changes ON sparcsn4.srv_event_field_changes.event_gkey=sparcsn4.srv_event.gkey \n" +
+                    " WHERE sparcsn4.srv_event.applied_to_gkey=sparcsn4.inv_unit.gkey AND sparcsn4.srv_event.event_type_gkey IN(18,13,16) AND \n" +
+                    " sparcsn4.srv_event_field_changes.new_value IS NOT NULL AND sparcsn4.srv_event_field_changes.new_value !='' AND \n" +
+                    " sparcsn4.srv_event_field_changes.new_value !='Y-CGP-.' AND sparcsn4.srv_event.gkey<(SELECT sparcsn4.srv_event.gkey \n" +
+                    " FROM sparcsn4.srv_event INNER JOIN sparcsn4.srv_event_field_changes ON sparcsn4.srv_event_field_changes.event_gkey=sparcsn4.srv_event.gkey\n" +
+                    " WHERE sparcsn4.srv_event.event_type_gkey=4 AND sparcsn4.srv_event.applied_to_gkey=sparcsn4.inv_unit.gkey AND metafield_id='unitFlexString01' AND\n" +
+                    " new_value IS NOT NULL ORDER BY sparcsn4.srv_event_field_changes.gkey DESC LIMIT 1) ORDER BY sparcsn4.srv_event.gkey DESC LIMIT 1),\n" +
+                    "(SELECT SUBSTRING(sparcsn4.srv_event_field_changes.new_value,7) FROM sparcsn4.srv_event \n" +
+                    " INNER JOIN sparcsn4.srv_event_field_changes ON sparcsn4.srv_event_field_changes.event_gkey=sparcsn4.srv_event.gkey \n" +
+                    " WHERE sparcsn4.srv_event.applied_to_gkey=sparcsn4.inv_unit.gkey AND sparcsn4.srv_event.event_type_gkey IN(18,13,16) \n" +
+                    " ORDER BY sparcsn4.srv_event_field_changes.gkey DESC LIMIT 1)) AS carrentPosition, \n" +
+                    "\t\n" +
+                    " (SELECT ctmsmis.cont_yard(carrentPosition)) AS Yard_No, \n" +
+                    " (SELECT ctmsmis.cont_block(carrentPosition, Yard_No)) AS Block_No\n" +
+                    " FROM sparcsn4.inv_unit \n" +
+                    " INNER JOIN sparcsn4.inv_unit_fcy_visit ON inv_unit_fcy_visit.unit_gkey=inv_unit.gkey \n" +
+                    " INNER JOIN sparcsn4.argo_carrier_visit ON sparcsn4.inv_unit_fcy_visit.actual_ib_cv=sparcsn4.argo_carrier_visit.gkey \n" +
+                    " INNER JOIN sparcsn4.vsl_vessel_visit_details ON sparcsn4.argo_carrier_visit.cvcvd_gkey=sparcsn4.vsl_vessel_visit_details.vvd_gkey\n" +
+                    " INNER JOIN sparcsn4.ref_bizunit_scoped r ON r.gkey=inv_unit.line_op \n" +
+                    " INNER JOIN sparcsn4.inv_goods ON sparcsn4.inv_goods.gkey=sparcsn4.inv_unit.goods\n" +
+                    " WHERE inv_unit.id ='"+cont_no+"' AND vsl_vessel_visit_details.ib_vyg='"+rot_no+"'\n" +
+                    " AND sparcsn4.inv_goods.destination='2591'  AND sparcsn4.inv_unit_fcy_visit.transit_state='S40_YARD' AND  inv_unit.category='IMPRT')\n" +
+                    " AS tmp "+strYard ;
+            System.out.println("resultn4:" + n4_query);
 
             List<DGLyingModel> n4DataList = secondaryDBTemplate.query(n4_query, new DGLyingReportService.n4DataListRowMapper());
             if (n4DataList.size() > 0) {
 
                 DGLyingModel n4DgInfo = n4DataList.get(0);
-                if( n4DgInfo.getArrival_dt()!=null) {
+               if( n4DgInfo.getArrival_dt()!=null) {
 
-                    DGLying_ResultModel.setCont_number(dgResltIgm.getCont_number());
-                    DGLying_ResultModel.setCont_size(dgResltIgm.getCont_size());
-                    DGLying_ResultModel.setCont_height(dgResltIgm.getCont_height());
-                    DGLying_ResultModel.setImport_Rotation_No(dgResltIgm.getImport_Rotation_No());
-                    DGLying_ResultModel.setNotify_name(dgResltIgm.getNotify_name());
-                    DGLying_ResultModel.setCont_imo(dgResltIgm.getCont_imo());
-                    DGLying_ResultModel.setCont_un(dgResltIgm.getCont_un());
-                    DGLying_ResultModel.setCont_status(dgResltIgm.getCont_status());
-                    DGLying_ResultModel.setDescription_of_Goods(dgResltIgm.getDescription_of_Goods());
-                    DGLying_ResultModel.setBL_No(dgResltIgm.getBL_No());
-                    DGLying_ResultModel.setVessel_Name(dgResltIgm.getVessel_Name());
-                    DGLying_ResultModel.setDelivery_Status_date(dgResltIgm.getDelivery_Status_date());
+                   DGLying_ResultModel.setCont_number(dgResltIgm.getCont_number());
+                   DGLying_ResultModel.setCont_size(dgResltIgm.getCont_size());
+                   DGLying_ResultModel.setCont_height(dgResltIgm.getCont_height());
+                   DGLying_ResultModel.setImport_Rotation_No(dgResltIgm.getImport_Rotation_No());
+                   DGLying_ResultModel.setNotify_name(dgResltIgm.getNotify_name());
+                   DGLying_ResultModel.setCont_imo(dgResltIgm.getCont_imo());
+                   DGLying_ResultModel.setCont_un(dgResltIgm.getCont_un());
+                   DGLying_ResultModel.setCont_status(dgResltIgm.getCont_status());
+                   DGLying_ResultModel.setDescription_of_Goods(dgResltIgm.getDescription_of_Goods());
+                   DGLying_ResultModel.setBL_No(dgResltIgm.getBL_No());
+                   DGLying_ResultModel.setVessel_Name(dgResltIgm.getVessel_Name());
+                   DGLying_ResultModel.setDelivery_Status_date(dgResltIgm.getDelivery_Status_date());
 
 
-                    DGLying_ResultModel.setArrival_dt(n4DgInfo.getArrival_dt());
-                    DGLying_ResultModel.setMlo(n4DgInfo.getMlo());
-                    DGLying_ResultModel.setObpc_number(n4DgInfo.getObpc_number());
-                    DGLying_ResultModel.setObpc_date(n4DgInfo.getObpc_date());
-                    DGLying_ResultModel.setRl_no(n4DgInfo.getRl_no());
-                    DGLying_ResultModel.setRl_date(n4DgInfo.getRl_date());
-                }
+                   DGLying_ResultModel.setArrival_dt(n4DgInfo.getArrival_dt());
+                   DGLying_ResultModel.setMlo(n4DgInfo.getMlo());
+                   DGLying_ResultModel.setObpc_number(n4DgInfo.getObpc_number());
+                   DGLying_ResultModel.setObpc_date(n4DgInfo.getObpc_date());
+                   DGLying_ResultModel.setRl_no(n4DgInfo.getRl_no());
+                   DGLying_ResultModel.setRl_date(n4DgInfo.getRl_date());
+               }
                 DGLyingList.add(DGLying_ResultModel);
             }
 
@@ -236,7 +207,7 @@ public class DGLyingReportService {
             dgByYard.setVessel_Name(rs.getString("vessel_Name"));
             dgByYard.setCont_number(rs.getString("cont_number"));
             dgByYard.setCont_size(rs.getString("cont_size"));
-            //dgByYard.setCont_height(rs.getString("height"));
+          //  dgByYard.setCont_height(rs.getString("height"));
             dgByYard.setImport_Rotation_No(rs.getString("Import_Rotation_No"));
             dgByYard.setDischarge_dt(rs.getString("discharge_dt"));
             dgByYard.setBL_No(rs.getString("BL_No"));

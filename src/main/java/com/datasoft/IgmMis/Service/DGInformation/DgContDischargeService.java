@@ -46,6 +46,7 @@ public class DgContDischargeService  {
         for(int i=0;i<igmmasterResult1.length;i++){
             import_Rotation_No=igmmasterResult1[i].get(0).toString();
             vessel_name=igmmasterResult1[i].get(1).toString();
+//discharge.setVessel_Name(Vessel_name);
         }
         System.out.println("igm_masters_Vessel_Name:"+vessel_name );
 
@@ -142,6 +143,18 @@ public class DgContDischargeService  {
                 Discharge.setVessel_Name(Vessel_name);
                 Discharge.setImport_Rotation_No(Rotation_No);
 
+//                Discharge.setImport_Rotation_No(import_Rotation_No);
+
+//                if(result_igm_details[i].get(2) != null){
+//                    Agent_Code = result_igm_details[i].get(2).toString();
+//                } else {
+//                    Agent_Code = "";
+//                }
+//
+//
+//                System.out.println("agent_code:"+Agent_Code );
+//                Discharge.setAGentCode(Agent_Code);
+
 
 
 
@@ -172,6 +185,11 @@ public class DgContDischargeService  {
                     System.out.println("mlo_agent_code_ctms:" + row_mlo_agent_code_ctms);
 
                 }
+                // List result_igm_detail_container_total[] = dgContDischargeRepository.result_igm_detail_container(Import_Rotation_No,row_submitee_org_id,row_mlocode);
+                //            public Integer gangAssignmentUpdate(Long id,Long gang_id, Long work_location_id, Long labor_id, String shift, String rotation, String container, String bl, String crane, String shed, String vsl_name, String vvd_gkey, String unit_gkey, Date
+                //            start_time, Date end_time){
+                //                return gangAssignEditRepo.gangAssignmentUpdate(id,gang_id,work_location_id,labor_id,shift,rotation,container,bl,crane,shed,vsl_name,vvd_gkey,unit_gkey,start_time,end_time);
+                //            }
 
 
                 Integer result_igm_detail_container_total = dgContDischargeRepository.result_igm_detail_container(Import_Rotation_No,row_submitee_org_id,mlocode);

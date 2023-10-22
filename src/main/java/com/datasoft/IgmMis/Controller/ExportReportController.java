@@ -31,10 +31,6 @@ public class ExportReportController {
     private ExportContainerBlockReportService exportContainerBlockReportService;
 
     @Autowired
-    private ExportContainerLoadingDetailService exportContainerLoadingDetailService;
-
-
-    @Autowired
     private ExportDestinationWiseMloLoadedContainerListService exportDestinationWiseMloLoadedContainerListService;
 
     @Autowired
@@ -146,53 +142,6 @@ public class ExportReportController {
     public @ResponseBody List<ExportCopino>ListOfCopino(@PathVariable("Rotation_No")String Rotation_No) throws SQLException{
         return exportCopinoService.CopinoData(Rotation_No);
     }
-
-
-
-
-
-
-
-
-    @RequestMapping(value = "/ExportContainerLoadingDetail/{importRotaition}",method = RequestMethod.GET)
-
-    @ResponseBody
-    public Integer getvvd_gkey(@PathVariable String importRotaition){
-        String rotation=importRotaition.replace('_','/');
-        Integer vvdgkey=exportContainerLoadingDetailService.get_Gkey(rotation);
-        return vvdgkey;
-    }
-
-
-
-
-    @RequestMapping(value = "/ExportContainerLoadingDetailsVesselInfo/{importRotaition}",method = RequestMethod.GET)
-
-    public   @ResponseBody List  getContainerLoadingVesselInfo(@PathVariable String importRotaition){
-
-        String rotation=importRotaition.replace('_','/');
-        Integer vvdgkey=exportContainerLoadingDetailService.get_Gkey(rotation);
-        return exportContainerLoadingDetailService.get_container_Loading_Details_vessel_info(vvdgkey);
-
-    }
-
-    @RequestMapping(value = "/ExportContatinerLoadingDetailtList/{importRotaition_No}",method = RequestMethod.GET)
-    public @ResponseBody List getContainerLoadingDetailList(@PathVariable String importRotaition_No){
-        String rotation=importRotaition_No.replace('_','/');
-        Integer vvdgkey=exportContainerLoadingDetailService.get_Gkey(rotation);
-        return exportContainerLoadingDetailService.getContainerLoadedDetails(vvdgkey);
-
-    }
-
-
-
-
-
-
-
-
-
-
 
     @RequestMapping(value = "/ExportContainerBlockReport/{importRotaition}",method = RequestMethod.GET)
 

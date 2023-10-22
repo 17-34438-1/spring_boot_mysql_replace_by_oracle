@@ -37,7 +37,6 @@ public class ExportContainerNotFoundReport {
     private String weight;
     private String yard;
     private String last_pos_slot;
-    private String coming_from;
 
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -52,14 +51,6 @@ public class ExportContainerNotFoundReport {
     private String stowage_pos;
     private String short_name;
     private String user_id;
-
-    public String getComing_from() {
-        return coming_from;
-    }
-
-    public void setComing_from(String coming_from) {
-        this.coming_from = coming_from;
-    }
 
     public Integer getVvd_gkey() {
         return vvd_gkey;
