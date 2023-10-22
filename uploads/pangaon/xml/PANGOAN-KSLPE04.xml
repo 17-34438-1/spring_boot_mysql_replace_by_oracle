@@ -1,0 +1,575 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<argo:snx xmlns:argo='http://www.navis.com/argo' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.navis.com/argo snx.xsd'>
+<unit id='BSIU2725740' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='GST'  xml-status='0'>
+<equipment eqid='BSIU2725740' type='22G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='GST'/>
+</unit>
+<unit id='DFSU2314344' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='GST'  xml-status='0'>
+<equipment eqid='DFSU2314344' type='22G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='GST'/>
+</unit>
+<unit id='DFSU6488690' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='GST'  xml-status='0'>
+<equipment eqid='DFSU6488690' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='GST'/>
+</unit>
+<unit id='FSCU8225419' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='GST'  xml-status='0'>
+<equipment eqid='FSCU8225419' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='GST'/>
+</unit>
+<unit id='TCNU5349705' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='GST'  xml-status='0'>
+<equipment eqid='TCNU5349705' type='45' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='GST'/>
+</unit>
+<unit id='GATU1022636' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='GATU1022636' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='GESU3489986' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='GESU3489986' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MRKU7762465' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MRKU7762465' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MRKU7778559' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MRKU7778559' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MRKU8153289' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MRKU8153289' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MRKU8907394' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MRKU8907394' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MRKU9448366' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MRKU9448366' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MRKU9823425' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MRKU9823425' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MSKU2418248' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MSKU2418248' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MSKU2643275' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MSKU2643275' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MSKU4019714' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MSKU4019714' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MSKU4379074' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MSKU4379074' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MSKU5603867' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MSKU5603867' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MSKU5640270' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MSKU5640270' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MSKU7708698' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='MSKU7708698' type='2210' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='POCU0573895' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MCC'  xml-status='0'>
+<equipment eqid='POCU0573895' type='2200' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='CAIU8356345' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='MCC'  xml-status='0'>
+<equipment eqid='CAIU8356345' type='4510' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MRKU3056476' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='MCC'  xml-status='0'>
+<equipment eqid='MRKU3056476' type='4510' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MRKU4191830' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='MCC'  xml-status='0'>
+<equipment eqid='MRKU4191830' type='4510' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MRKU4690248' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='MCC'  xml-status='0'>
+<equipment eqid='MRKU4690248' type='4510' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='MSKU9393223' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='MCC'  xml-status='0'>
+<equipment eqid='MSKU9393223' type='4510' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='MCC'/>
+</unit>
+<unit id='TGHU2323139' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='MSL'  xml-status='0'>
+<equipment eqid='TGHU2323139' type='2200' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='MSL'/>
+</unit>
+<unit id='MSKU1912554' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='MSL'  xml-status='0'>
+<equipment eqid='MSKU1912554' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='MSL'/>
+</unit>
+<unit id='MSKU9586984' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='MSL'  xml-status='0'>
+<equipment eqid='MSKU9586984' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='MSL'/>
+</unit>
+<unit id='OOLU0268048' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU0268048' type='22G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU0484638' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU0484638' type='22G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU1799521' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU1799521' type='22G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='FSCU8138103' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='FSCU8138103' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU8087792' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU8087792' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU8305620' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU8305620' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU8410333' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU8410333' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU8491762' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU8491762' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU8740865' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU8740865' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU8966929' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU8966929' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU8972310' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU8972310' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU9213318' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU9213318' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU9620102' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU9620102' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU9720143' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU9720143' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU9724236' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU9724236' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='OOLU9732268' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='OOLU9732268' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='TCLU8595114' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='TCLU8595114' type='45G1' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='TCLU9456387' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='TCLU9456387' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='TCNU6238033' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='4200'  line='OCC'  xml-status='0'>
+<equipment eqid='TCNU6238033' type='4500' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='4200'/>
+<unit-etc category='STORAGE' line='OCC'/>
+</unit>
+<unit id='MSKU2781459' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='SAF'  xml-status='0'>
+<equipment eqid='MSKU2781459' type='2200' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='SAF'/>
+</unit>
+<unit id='MSKU3746719' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='SAF'  xml-status='0'>
+<equipment eqid='MSKU3746719' type='2200' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='SAF'/>
+</unit>
+<unit id='PONU0504115' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='SAF'  xml-status='0'>
+<equipment eqid='PONU0504115' type='2200' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='SAF'/>
+</unit>
+<unit id='TCKU3269714' category='STORAGE' transit-state='INBOUND' visit-state='ACTIVE' freight-kind='MTY' weight-kg='2200'  line='SAF'  xml-status='0'>
+<equipment eqid='TCKU3269714' type='2200' class='CTR' life-cycle-state='ACT' role='PRIMARY'></equipment>
+<routing pol='CGP' pod-1='CGP'>
+<carrier direction='IB' qualifier='DECLARED' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='IB' qualifier='ACTUAL' mode='VESSEL' id='KSLPE04'></carrier>
+<carrier direction='OB' qualifier='DECLARED' mode='VESSEL' id='GEN_CARRIER'></carrier>
+<carrier direction='OB' qualifier='ACTUAL' mode='VESSEL' id='GEN_CARRIER'></carrier>
+</routing>
+<contents weight-kg='2200'/>
+<unit-etc category='STORAGE' line='SAF'/>
+</unit>
+</argo:snx>
